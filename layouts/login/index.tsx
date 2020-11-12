@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Row, Col } from 'antd';
 
-import LoginComponent from '../../../components/admin/login';
+import LayoutProps from '../../types/props/layout';
 
 const layout = {
   xs: {
@@ -15,7 +15,9 @@ const layout = {
   },
 };
 
-const Login: React.FC = () => {
+const Login: React.FC<LayoutProps> = ({
+  children,
+}: LayoutProps) => {
   return (
     <Layout
       className="login"
@@ -35,9 +37,7 @@ const Login: React.FC = () => {
           }}
         >
           <Row justify="center">
-            <Col {...layout}>
-              <LoginComponent />
-            </Col>
+            <Col {...layout}>{children}</Col>
           </Row>
         </div>
       </Layout.Content>

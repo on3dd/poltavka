@@ -1,19 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const Div = styled.div``;
-
-const Heading = styled.h1`
-  font-size: 5rem;
-`;
+import AdminLayout from '../../layouts/admin';
+import AdminComponent from '../../components/admin';
 
 const Admin: React.FC = () => {
   return (
-    <Div className="admin">
-      <Heading className="admin__heading">
-        Fuck niggers!
-      </Heading>
-    </Div>
+    <AdminLayout>
+      <AdminComponent />
+    </AdminLayout>
   );
 };
 
