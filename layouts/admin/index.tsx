@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Layout, Menu, Breadcrumb, Typography } from 'antd';
 import {
   IdcardOutlined,
-  HomeOutlined,
   TeamOutlined,
   UserOutlined,
   ReadOutlined,
@@ -107,12 +106,6 @@ const Admin: React.FC<LayoutProps> = ({
               return [...acc, key];
             }, [])}
         >
-          {/* <Menu.Item key="/admin" icon={<HomeOutlined />}>
-            <Link href="/admin">
-              <a>Главная</a>
-            </Link>
-          </Menu.Item> */}
-
           <Menu.Item
             key="/admin/queue"
             icon={<TeamOutlined />}

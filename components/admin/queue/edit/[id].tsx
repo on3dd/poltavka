@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  Cascader,
-  TreeSelect,
-  Switch,
-} from 'antd';
 import { useRouter } from 'next/router';
+import { Form, Input, Button, Select, Switch } from 'antd';
+
 const FormSizeDemo = () => {
   const router = useRouter();
   const [initialValues, setInitialValues] = useState({
@@ -51,7 +44,8 @@ const FormSizeDemo = () => {
           </Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item label="Страна">
+
+      {/* <Form.Item label="Страна">
         <Select>
           <Select.Option value="russia">
             Российская Федерация
@@ -60,10 +54,12 @@ const FormSizeDemo = () => {
             Китайская Народная Республика
           </Select.Option>
         </Select>
-      </Form.Item>
+      </Form.Item> */}
+
       <Form.Item label="Номер автомобиля">
         <Input />
       </Form.Item>
+
       <Form.Item
         name="isOwner"
         valuePropName="checked"
@@ -71,20 +67,25 @@ const FormSizeDemo = () => {
       >
         <Switch />
       </Form.Item>
+
       {!initialValues.isOwner && (
         <Form.Item label="Собственник автомобиля">
           <Input />
         </Form.Item>
       )}
+
       <Form.Item label="Товар">
         <Input />
       </Form.Item>
+
       <Form.Item label="Местоположение автомобиля">
         <Input />
       </Form.Item>
+
       <Form.Item label="Статус">
         <Input />
       </Form.Item>
+
       <Form.Item label="Button">
         <Button type="primary" htmlType="submit">
           Добавить
