@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Layout, Menu, Breadcrumb, Typography } from 'antd';
 import {
@@ -20,6 +22,7 @@ const Admin: React.FC<LayoutProps> = ({
   children,
 }: LayoutProps) => {
   const [collapsed, setCollapsed] = useState(false);
+  const router = useRouter();
 
   const onCollapse = (value: boolean) => {
     console.log('onCollapse value:', value);
@@ -86,27 +89,60 @@ const Admin: React.FC<LayoutProps> = ({
           theme="light"
           defaultSelectedKeys={['1']}
           mode="inline"
+          activeKey={router.pathname}
+          selectedKeys={[router.pathname]}
         >
-          <Menu.Item key="1" icon={<HomeOutlined />}>
-            Главная
+          <Menu.Item key="/admin" icon={<HomeOutlined />}>
+            <Link href="/admin">
+              <a>Главная</a>
+            </Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<TeamOutlined />}>
-            Очередь
+
+          <Menu.Item
+            key="/admin/queue"
+            icon={<TeamOutlined />}
+          >
+            <Link href="/admin/queue">
+              <a>Очередь</a>
+            </Link>
           </Menu.Item>
+
           <Menu.SubMenu
-            key="sub1"
+            key="/admin/users"
             icon={<UserOutlined />}
             title="Пользователи"
           >
-            <Menu.Item key="3">Обычные</Menu.Item>
-            <Menu.Item key="4">Диспетчеры</Menu.Item>
-            <Menu.Item key="5">Администраторы</Menu.Item>
+            <Menu.Item key="/admin/users/ordinary">
+              <Link href="/admin/users/ordinary">
+                <a>Обычные</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/admin/users/dispatchers">
+              <Link href="/admin/users/dispatchers">
+                <a>Диспетчеры</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/admin/users/adminstrators">
+              <Link href="/admin/users/administrators">
+                <a>Администраторы</a>
+              </Link>
+            </Menu.Item>
           </Menu.SubMenu>
-          <Menu.Item key="6" icon={<ReadOutlined />}>
-            Новости
+          <Menu.Item
+            key="/admin/news"
+            icon={<ReadOutlined />}
+          >
+            <Link href="/admin/news">
+              <a>Новости</a>
+            </Link>
           </Menu.Item>
-          <Menu.Item key="7" icon={<LineChartOutlined />}>
-            Статистика
+          <Menu.Item
+            key="/admin/statistics"
+            icon={<LineChartOutlined />}
+          >
+            <Link href="/admin/statistics">
+              <a>Статистика</a>
+            </Link>
           </Menu.Item>
         </Menu>
       </Layout.Sider>
