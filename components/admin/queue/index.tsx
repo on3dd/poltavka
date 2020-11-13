@@ -1,8 +1,19 @@
 import React from 'react';
-import { Typography } from 'antd';
+import { Table } from 'antd';
+
+import { rowSelection, columns, data } from './table';
 
 const Queue: React.FC = () => {
-  return <Typography.Text>I hate queue</Typography.Text>;
+  return (
+    <Table
+      rowSelection={{
+        type: 'checkbox',
+        ...rowSelection,
+      }}
+      columns={columns}
+      dataSource={data}
+    />
+  );
 };
 
 export default Queue;

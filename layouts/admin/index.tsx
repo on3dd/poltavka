@@ -164,7 +164,7 @@ const Admin: React.FC<LayoutProps> = ({
           </div>
         </Layout.Content>
         <Layout.Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
+          Poltavka ©2020 Создано командой ASAP ДВФУ
         </Layout.Footer>
       </Layout>
     </Layout>
