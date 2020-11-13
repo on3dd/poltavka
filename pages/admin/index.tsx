@@ -1,12 +1,12 @@
 import React from 'react';
 
 import AdminLayout from '../../layouts/admin';
-import AdminComponent from '../../components/admin';
+import IndexComponent from '../../components/admin';
 
 const Admin: React.FC = () => {
   return (
     <AdminLayout>
-      <AdminComponent />
+      <IndexComponent />
     </AdminLayout>
   );
 };

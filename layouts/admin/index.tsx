@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { Layout, Menu, Breadcrumb, Typography } from 'antd';
 import {
+  IdcardOutlined,
   HomeOutlined,
   TeamOutlined,
   UserOutlined,
@@ -25,32 +26,64 @@ const Admin: React.FC<LayoutProps> = ({
     setCollapsed(value);
   };
 
+  const renderTitle = useMemo(() => {
+    return (
+      <Logo
+        className="logo"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 16px 0 24px',
+        }}
+      >
+        <Typography.Title
+          level={3}
+          style={{
+            margin: 'auto 0',
+            color: '#000',
+          }}
+        >
+          Полтавка
+        </Typography.Title>
+      </Logo>
+    );
+  }, []);
+
+  const renderIcon = useMemo(() => {
+    return (
+      <Logo
+        className="logo"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <IdcardOutlined
+          style={{
+            fontSize: '32px',
+            // lineHeight: '1.35',
+          }}
+        />
+      </Logo>
+    );
+  }, []);
+
+  const renderLogo = useMemo(() => {
+    return collapsed ? renderIcon : renderTitle;
+  }, [collapsed]);
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Layout.Sider
+        theme="light"
         collapsible
         collapsed={collapsed}
         onCollapse={onCollapse}
       >
-        <Logo
-          className="logo"
-          style={{
-            display: 'flex',
-            padding: '0 16px 0 24px',
-          }}
-        >
-          <Typography.Title
-            level={3}
-            style={{
-              margin: 'auto 0',
-              color: '#fff',
-            }}
-          >
-            Полтавка
-          </Typography.Title>
-        </Logo>
+        {renderLogo}
         <Menu
-          theme="dark"
+          theme="light"
           defaultSelectedKeys={['1']}
           mode="inline"
         >
@@ -80,12 +113,12 @@ const Admin: React.FC<LayoutProps> = ({
       <Layout className="site-layout">
         <Layout.Header
           className="site-layout-background"
-          style={{ padding: 0 }}
+          style={{ padding: 0, backgroundColor: '#fff' }}
         />
         <Layout.Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb.Item>Главная</Breadcrumb.Item>
+            {/* <Breadcrumb.Item>Bill</Breadcrumb.Item> */}
           </Breadcrumb>
           <div
             className="site-layout-background"
