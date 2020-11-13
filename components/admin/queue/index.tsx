@@ -60,6 +60,7 @@ const Queue: React.FC = () => {
         </Col>
       </Row>
       <Table
+        size="large"
         rowSelection={{
           type: 'radio',
           ...rowSelection,

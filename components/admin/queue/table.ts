@@ -13,8 +13,8 @@ export const data = new Array(100)
     product: 'Снюс',
     driver: 'Ишутин А. Я.',
     car_owner: 'OOO "Jaguar.Pro"',
-    car_location: 'ДНР',
-    car_status: '1. Убил негра',
+    car_location: 'Российская Федерация',
+    car_status: 'Убил негра',
   }));
 
 export const columns = [
@@ -49,7 +49,7 @@ export const columns = [
     dataIndex: 'car_owner',
   },
   {
-    title: 'Локация',
+    title: 'Местоположение',
     dataIndex: 'car_location',
   },
   {
