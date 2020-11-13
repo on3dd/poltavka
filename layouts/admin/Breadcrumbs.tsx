@@ -17,17 +17,19 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   pathname,
 }: BreadcrumbsProps) => {
   const breadcrumbs = useMemo(() => {
-    return pathname.split('/').reduce((acc, curr, idx) => {
-      const item =
-        idx === 0
-          ? { path: '' }
-          : {
-              name: PATH_NAMES[curr],
-              path: acc[idx - 1].path + '/' + curr,
-            };
+    return pathname
+      .split('/')
+      .slice(1)
+      .reduce((acc, curr, idx) => {
+        const path = acc[idx - 1] ? acc[idx - 1].path : '';
 
-      return [...acc, item];
-    }, []);
+        const item = {
+          name: PATH_NAMES[curr],
+          path: path + '/' + curr,
+        };
+
+        return [...acc, item];
+      }, []);
   }, [pathname]);
 
   const renderBreadcrumb = ({
@@ -45,7 +47,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   return (
     <Breadcrumb style={{ margin: '16px 0' }}>
-      {breadcrumbs.slice(1).map((el) => {
+      {breadcrumbs.map((el) => {
         return renderBreadcrumb(el);
       })}
     </Breadcrumb>

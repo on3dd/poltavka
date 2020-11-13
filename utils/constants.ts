@@ -7,7 +7,7 @@ export const PATH_NAMES = {
   administrators: 'Администраторы',
   news: 'Новости',
   statistics: 'Статистика',
-  edit: 'Изменение',
+  edit: 'Редактирование',
   new: 'Новый',
   '[id]': 'ID',
 };
