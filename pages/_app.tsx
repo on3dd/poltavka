@@ -15,7 +15,7 @@ const App: NextPage<AppProps> = ({
   return (
     <>
       <NextNProgress color="#1890ff" />
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </>
   );
 };
