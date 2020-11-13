@@ -1,6 +1,7 @@
 import { NextPage, NextComponentType } from 'next';
+import NextNProgress from 'nextjs-progressbar';
 
-import "../styles/antd.less";
+import '../styles/antd.less';
 
 type AppProps = {
   Component: NextComponentType;
@@ -11,7 +12,12 @@ const App: NextPage<AppProps> = ({
   Component,
   pageProps,
 }: AppProps) => {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <NextNProgress color="#1890ff" />
+      <Component {...pageProps} />;
+    </>
+  );
 };
 
 export default App;
