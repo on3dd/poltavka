@@ -1,5 +1,5 @@
 import React from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import {
   Form,
   Select,
@@ -20,15 +20,7 @@ const validateMessages = {
 };
 
 const LoginForm: React.FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-
-    Router.push('/admin');
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+  const router = useRouter();
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -41,6 +33,16 @@ const LoginForm: React.FC = () => {
   const initialValues = {
     remember: true,
     prefix: '+7',
+  };
+
+  const onFinish = (values: any) => {
+    console.log('Success:', values);
+
+    router.push('/admin');
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -107,7 +109,7 @@ const LoginForm: React.FC = () => {
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Войти
         </Button>
       </Form.Item>
     </Form>

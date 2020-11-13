@@ -83,6 +83,12 @@ const Admin: React.FC<LayoutProps> = ({
         collapsible
         collapsed={collapsed}
         onCollapse={onCollapse}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+        }}
       >
         {renderLogo}
         <Menu
@@ -155,7 +161,10 @@ const Admin: React.FC<LayoutProps> = ({
           </Menu.Item>
         </Menu>
       </Layout.Sider>
-      <Layout className="site-layout">
+      <Layout
+        className="site-layout"
+        style={{ marginLeft: 200 }}
+      >
         <Layout.Header
           className="site-layout-background"
           style={{ padding: 0, backgroundColor: '#fff' }}
