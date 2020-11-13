@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Form, Input, Button, Select, Switch } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
 
 const FormSizeDemo = () => {
   const router = useRouter();
@@ -8,7 +9,7 @@ const FormSizeDemo = () => {
     isOwner: true,
   });
 
-  const onValueChange = (values: any) => {
+  const onValuesChange = (values: any) => {
     console.log('onvaluechange', values);
 
     setInitialValues(values);
@@ -29,7 +30,7 @@ const FormSizeDemo = () => {
       size="large"
       layout="vertical"
       initialValues={initialValues}
-      onValuesChange={onValueChange}
+      onValuesChange={onValuesChange}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       // validateMessages={validateMessages}
@@ -44,17 +45,6 @@ const FormSizeDemo = () => {
           </Select.Option>
         </Select>
       </Form.Item>
-
-      {/* <Form.Item label="Страна">
-        <Select>
-          <Select.Option value="russia">
-            Российская Федерация
-          </Select.Option>
-          <Select.Option value="china">
-            Китайская Народная Республика
-          </Select.Option>
-        </Select>
-      </Form.Item> */}
 
       <Form.Item label="Номер автомобиля">
         <Input />
@@ -86,9 +76,13 @@ const FormSizeDemo = () => {
         <Input />
       </Form.Item>
 
-      <Form.Item label="Button">
-        <Button type="primary" htmlType="submit">
-          Добавить
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          icon={<UserAddOutlined />}
+        >
+          Добавить в очередь
         </Button>
       </Form.Item>
     </Form>
