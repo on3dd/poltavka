@@ -92,7 +92,8 @@ const Admin: React.FC<LayoutProps> = ({
         {renderLogo}
         <Menu
           theme="light"
-          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['/admin/users']}
+          defaultSelectedKeys={['/admin/queue']}
           mode="inline"
           activeKey={router.pathname}
           selectedKeys={router.pathname
