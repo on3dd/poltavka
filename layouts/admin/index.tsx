@@ -90,13 +90,22 @@ const Admin: React.FC<LayoutProps> = ({
           defaultSelectedKeys={['1']}
           mode="inline"
           activeKey={router.pathname}
-          selectedKeys={[router.pathname]}
+          selectedKeys={router.pathname
+            .split('/')
+            .reduce((acc, curr, idx) => {
+              const key =
+                idx === 0
+                  ? curr
+                  : acc[idx - 1] + '/' + curr;
+
+              return [...acc, key];
+            }, [])}
         >
-          <Menu.Item key="/admin" icon={<HomeOutlined />}>
+          {/* <Menu.Item key="/admin" icon={<HomeOutlined />}>
             <Link href="/admin">
               <a>Главная</a>
             </Link>
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item
             key="/admin/queue"
