@@ -1,3 +1,7 @@
+import { capitalize } from '../../../utils/functions';
+
+const capitalieTitle = (val: string) => capitalize(val);
+
 export const data = new Array(100)
   .fill(0)
   .map((_, idx) => ({
@@ -25,6 +29,7 @@ export const columns = [
   {
     title: 'Страна',
     dataIndex: 'country',
+    render: capitalieTitle,
   },
   {
     title: 'Номер авто',
@@ -33,6 +38,7 @@ export const columns = [
   {
     title: 'Товар',
     dataIndex: 'product',
+    render: capitalieTitle,
   },
   {
     title: 'Водитель',
