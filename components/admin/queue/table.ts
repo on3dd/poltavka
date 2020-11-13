@@ -19,7 +19,7 @@ export const data = new Array(100)
 
 export const columns = [
   {
-    title: 'Номер',
+    title: '№',
     dataIndex: 'number',
   },
   {

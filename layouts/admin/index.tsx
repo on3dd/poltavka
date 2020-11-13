@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Layout, Menu, Breadcrumb, Typography } from 'antd';
+import { Layout, Menu, Typography } from 'antd';
 import {
   IdcardOutlined,
   TeamOutlined,
@@ -12,6 +12,8 @@ import {
 } from '@ant-design/icons';
 
 import LayoutProps from '../../types/props/layout';
+
+import Breadcrumbs from './Breadcrumbs';
 
 const Logo = styled.div`
   height: 60px; // 64px - heading width; 4px - menu's first child margin
@@ -126,17 +128,20 @@ const Admin: React.FC<LayoutProps> = ({
                 <a>Обычные</a>
               </Link>
             </Menu.Item>
+
             <Menu.Item key="/admin/users/dispatchers">
               <Link href="/admin/users/dispatchers">
                 <a>Диспетчеры</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="/admin/users/adminstrators">
+
+            <Menu.Item key="/admin/users/administrators">
               <Link href="/admin/users/administrators">
                 <a>Администраторы</a>
               </Link>
             </Menu.Item>
           </Menu.SubMenu>
+
           <Menu.Item
             key="/admin/news"
             icon={<ReadOutlined />}
@@ -145,6 +150,7 @@ const Admin: React.FC<LayoutProps> = ({
               <a>Новости</a>
             </Link>
           </Menu.Item>
+
           <Menu.Item
             key="/admin/statistics"
             icon={<LineChartOutlined />}
@@ -163,11 +169,10 @@ const Admin: React.FC<LayoutProps> = ({
           className="site-layout-background"
           style={{ padding: 0, backgroundColor: '#fff' }}
         />
+
         <Layout.Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Главная</Breadcrumb.Item>
-            {/* <Breadcrumb.Item>Bill</Breadcrumb.Item> */}
-          </Breadcrumb>
+          <Breadcrumbs pathname={router.pathname} />
+
           <div
             className="site-layout-background"
             style={{ padding: 24, minHeight: 360 }}
@@ -175,6 +180,7 @@ const Admin: React.FC<LayoutProps> = ({
             {children}
           </div>
         </Layout.Content>
+
         <Layout.Footer style={{ textAlign: 'center' }}>
           Poltavka ©2020 Создано командой ASAP ДВФУ
         </Layout.Footer>
