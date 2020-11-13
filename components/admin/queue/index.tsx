@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { Row, Col, Space, Button, Table } from 'antd';
 import {
   UserAddOutlined,
@@ -9,8 +10,10 @@ import {
 import { rowSelection, columns, data } from './table';
 
 const Queue: React.FC = () => {
+  const router = useRouter();
+
   const onAddClick = () => {
-    console.log('add');
+    router.push('/admin/queue/edit/new');
   };
 
   const onEditClick = () => {
