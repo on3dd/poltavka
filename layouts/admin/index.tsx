@@ -30,6 +30,20 @@ const Admin: React.FC<LayoutProps> = ({
     setCollapsed(value);
   };
 
+  const selectedKeys = useMemo(() => {
+    return router.pathname === '/admin'
+      ? ['/admin']
+      : router.pathname
+          .split('/')
+          .reduce((acc, curr, idx) => {
+            const key =
+              idx === 0 ? curr : acc[idx - 1] + '/' + curr;
+
+            return [...acc, key];
+          }, [])
+          .slice(2);
+  }, [router.pathname]);
+
   const renderTitle = useMemo(() => {
     return (
       <Logo
@@ -66,7 +80,6 @@ const Admin: React.FC<LayoutProps> = ({
         <IdcardOutlined
           style={{
             fontSize: '32px',
-            // lineHeight: '1.35',
           }}
         />
       </Logo>
@@ -98,17 +111,14 @@ const Admin: React.FC<LayoutProps> = ({
           defaultSelectedKeys={['/admin/queue']}
           mode="inline"
           activeKey={router.pathname}
-          selectedKeys={router.pathname
-            .split('/')
-            .reduce((acc, curr, idx) => {
-              const key =
-                idx === 0
-                  ? curr
-                  : acc[idx - 1] + '/' + curr;
-
-              return [...acc, key];
-            }, [])}
+          selectedKeys={selectedKeys}
         >
+          <Menu.Item key="/admin" icon={<TeamOutlined />}>
+            <Link href="/admin">
+              <a>Главная</a>
+            </Link>
+          </Menu.Item>
+
           <Menu.Item
             key="/admin/queue"
             icon={<TeamOutlined />}
