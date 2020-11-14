@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import {
   Form,
   Select,
@@ -8,6 +7,8 @@ import {
   Checkbox,
 } from 'antd';
 import { parsePhoneNumber } from 'libphonenumber-js/mobile';
+
+import Auth from '../../types/Auth';
 
 const validateMessages = {
   required: '${label} не может быть пустым!',
@@ -19,9 +20,19 @@ const validateMessages = {
   },
 };
 
-const LoginForm: React.FC = () => {
-  const router = useRouter();
+type LoginFormProps = {
+  initialValues: Auth;
+  onValuesChange: (values: any) => void;
+  onFinish: (values: Auth) => void;
+  onFinishFailed: (values: any) => void;
+};
 
+const LoginForm: React.FC<LoginFormProps> = ({
+  initialValues,
+  onValuesChange,
+  onFinish,
+  onFinishFailed,
+}: LoginFormProps) => {
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select style={{ width: 70 }}>
@@ -30,27 +41,13 @@ const LoginForm: React.FC = () => {
     </Form.Item>
   );
 
-  const initialValues = {
-    remember: true,
-    prefix: '+7',
-  };
-
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-
-    router.push('/admin');
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
     <Form
       name="login"
       size="large"
       layout={'vertical'}
       initialValues={initialValues}
+      onValuesChange={onValuesChange}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       validateMessages={validateMessages}

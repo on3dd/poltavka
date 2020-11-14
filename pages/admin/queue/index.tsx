@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import wrapper from '../../../store';
 import fetchQueue from '../../../actions/fetchQueue';

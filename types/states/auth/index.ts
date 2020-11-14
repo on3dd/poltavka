@@ -1,8 +1,8 @@
 import NextState from '../next';
-import Post from '../../Post';
+import Auth from '../../Auth';
 
-export default interface PostsState extends NextState {
-  data: Post[];
+export default interface AuthState extends NextState {
+  data: Auth;
   isFetching: boolean;
   hasError: boolean;
   errorMessage: null | string;

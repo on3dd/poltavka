@@ -1,50 +1,51 @@
 import { Dispatch } from 'redux';
 
+import Auth from '../types/Auth';
+
 import axiosService from '../utils/axiosService';
 
 import {
-  FETCHING_QUEUE,
-  FETCHING_QUEUE_SUCCESS,
-  FETCHING_QUEUE_FAIL,
+  AUTH,
+  AUTH_SUCCESS,
+  AUTH_FAIL,
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
 import { sleep } from '../utils/functions';
-import { data } from '../components/admin/queue/table';
 
-const fetchQueue = () => {
+const auth = (data: Auth) => {
   return async (dispatch: Dispatch<any>) => {
-    dispatch({ type: FETCHING_QUEUE });
+    dispatch({ type: AUTH });
 
     return sleep(2000)
       .then(() => {
         dispatch({
-          type: FETCHING_QUEUE_SUCCESS,
+          type: AUTH_SUCCESS,
           payload: data,
         });
       })
       .catch((err) => {
         dispatch({
-          type: FETCHING_QUEUE_FAIL,
+          type: AUTH_FAIL,
           payload: err,
         });
       });
 
     // return axiosService
-    //   .get(API_ENDPOINTS.queue)
+    //   .get(API_ENDPOINTS.login)
     //   .then((res) => {
     //     dispatch({
-    //       type: FETCHING_QUEUE_SUCCESS,
+    //       type: AUTH_SUCCESS,
     //       payload: res.data,
     //     });
     //   })
     //   .catch((err) => {
     //     dispatch({
-    //       type: FETCHING_QUEUE_FAIL,
+    //       type: AUTH_FAIL,
     //       payload: err,
     //     });
     //   });
   };
 };
 
-export default fetchQueue;
+export default auth;

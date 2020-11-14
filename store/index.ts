@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import thunk, { ThunkMiddleware } from 'redux-thunk';
 import promise from 'redux-promise';
 import {
   MakeStore,
@@ -7,10 +7,14 @@ import {
   Context,
 } from 'next-redux-wrapper';
 
+import Action from '../types/Action';
 import RootState from '../types/states/index';
 import rootReducer from '../reducers/index';
 
-const middleware = applyMiddleware(thunk, promise);
+const middleware = applyMiddleware(
+  thunk as ThunkMiddleware<RootState, Action>,
+  promise,
+);
 
 const makeStore: MakeStore<RootState> = (ctx: Context) =>
   createStore(rootReducer, middleware);

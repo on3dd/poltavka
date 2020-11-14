@@ -1,7 +1,7 @@
 import NextState from '../next';
 import QueueItem from '../../QueueItem';
 
-export default interface SymbolsState extends NextState {
+export default interface QueueState extends NextState {
   data: QueueItem[];
   isFetching: boolean;
   hasError: boolean;

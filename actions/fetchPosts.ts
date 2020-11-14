@@ -1,4 +1,7 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+
+import State from '../types/states/posts';
 
 import axiosService from '../utils/axiosService';
 
@@ -11,7 +14,7 @@ import {
 import { API_ENDPOINTS } from '../utils/constants';
 
 const fetchPosts = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: FETCHING_POSTS });
 
     return axiosService

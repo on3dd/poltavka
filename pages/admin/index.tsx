@@ -1,19 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useStore } from 'react-redux';
 
 import wrapper from '../../store';
 import fetchPosts from '../../actions/fetchPosts';
+
 import RootState from '../../types/states';
 
 import AdminLayout from '../../layouts/admin';
 import IndexComponent from '../../components/admin';
 
 const Admin: React.FC = () => {
-  const posts = useSelector(
-    (state: RootState) => state.posts,
-  );
+  const store = useStore();
 
-  console.log('admin posts', posts.data.length);
+  console.log('state', store.getState());
 
   return (
     <AdminLayout>
@@ -30,7 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       );
     }
 
-    await store.dispatch(fetchPosts() as any);
+    await store.dispatch(fetchPosts() as any); // see https://github.com/kirill-konshin/next-redux-wrapper/issues/207
   },
 );
 
