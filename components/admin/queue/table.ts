@@ -1,8 +1,9 @@
 import { capitalize } from '../../../utils/functions';
+import QueueItem from '../../../types/QueueItem';
 
 const capitalieTitle = (val: string) => capitalize(val);
 
-export const data = new Array(100)
+export const data: QueueItem[] = new Array(100)
   .fill(0)
   .map((_, idx) => ({
     key: idx,

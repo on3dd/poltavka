@@ -1,8 +1,8 @@
 import NextState from '../next';
-import Post from '../../Post';
+import QueueItem from '../../QueueItem';
 
 export default interface SymbolsState extends NextState {
-  data: Post[];
+  data: QueueItem[];
   isFetching: boolean;
   hasError: boolean;
   errorMessage: null | string;

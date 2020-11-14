@@ -1,8 +1,13 @@
 import React from 'react';
-import { Typography } from 'antd';
+import { useSelector } from 'react-redux';
+import {  } from 'antd';
+
+import RootState from '../../types/states';
 
 const Admin: React.FC = () => {
-  return <Typography.Text>I hate niggers</Typography.Text>;
+  const state = useSelector((state: RootState) => state);
+
+  return <code>{JSON.stringify(state, null, 2)}</code>;
 };
 
 export default Admin;

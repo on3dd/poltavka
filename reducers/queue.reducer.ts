@@ -2,22 +2,22 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { diff } from 'jsondiffpatch';
 
 import {
-  FETCHING_POSTS,
-  FETCHING_POSTS_SUCCESS,
-  FETCHING_POSTS_FAIL,
+  FETCHING_QUEUE,
+  FETCHING_QUEUE_SUCCESS,
+  FETCHING_QUEUE_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
-import PostsState from '../types/states/posts';
+import QueueState from '../types/states/queue';
 
-const initialState: PostsState = {
+const initialState: QueueState = {
   data: [],
   isFetching: false,
   hasError: false,
   errorMessage: null,
 };
 
-const postsReducer = (
+const queueReducer = (
   state = initialState,
   action: AsyncAction,
 ) => {
@@ -30,7 +30,7 @@ const postsReducer = (
       return Object.assign(
         {},
         state,
-        action.payload.posts,
+        action.payload.queue,
         {
           page: wasBumpedOnClient
             ? state.page
@@ -38,14 +38,14 @@ const postsReducer = (
         },
       );
 
-    case FETCHING_POSTS:
+    case FETCHING_QUEUE:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
         errorMessage: null,
       });
 
-    case FETCHING_POSTS_SUCCESS:
+    case FETCHING_QUEUE_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -53,7 +53,7 @@ const postsReducer = (
         errorMessage: null,
       });
 
-    case FETCHING_POSTS_FAIL:
+    case FETCHING_QUEUE_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
@@ -65,4 +65,4 @@ const postsReducer = (
   }
 };
 
-export default postsReducer;
+export default queueReducer;

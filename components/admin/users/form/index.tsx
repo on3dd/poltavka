@@ -12,6 +12,8 @@ import {
   UserAddOutlined,
 } from '@ant-design/icons';
 
+import { generatePassword } from './config';
+
 type FormTemplateProps = {
   initialValues: {
     [key: string]: any;
@@ -66,6 +68,7 @@ const FormTemplate: React.FC<FormTemplateProps> = ({
             <Button
               type="default"
               icon={<FileProtectOutlined />}
+              onClick={generatePassword}
             >
               Сгенерировать
             </Button>

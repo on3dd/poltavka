@@ -1,6 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
 import { Row, Col, Space, Button, Table } from 'antd';
 import {
   UserAddOutlined,
@@ -8,29 +6,19 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons';
 
-import RootState from '../../../types/states';
+import { rowSelection, columns, data } from './config';
 
-import { rowSelection, columns } from './table';
+type TableTemplateProps = {
+  onAddClick: () => void;
+  onEditClick: () => void;
+  onDeleteClick: () => void;
+};
 
-const Queue: React.FC = () => {
-  const queue = useSelector(
-    (state: RootState) => state.queue,
-  );
-
-  const router = useRouter();
-
-  const onAddClick = () => {
-    router.push('/admin/queue/edit/new');
-  };
-
-  const onEditClick = () => {
-    console.log('edit');
-  };
-
-  const onDeleteClick = () => {
-    console.log('delete');
-  };
-
+const TableTemplate: React.FC<TableTemplateProps> = ({
+  onAddClick,
+  onEditClick,
+  onDeleteClick,
+}: TableTemplateProps) => {
   return (
     <>
       <Row
@@ -43,7 +31,7 @@ const Queue: React.FC = () => {
             icon={<UserAddOutlined />}
             onClick={onAddClick}
           >
-            Добавить в очередь
+            Добавить
           </Button>
         </Col>
         <Col>
@@ -69,7 +57,7 @@ const Queue: React.FC = () => {
       <Table
         size="large"
         columns={columns}
-        dataSource={queue.data}
+        dataSource={data}
         rowSelection={{
           type: 'radio',
           ...rowSelection,
@@ -79,4 +67,4 @@ const Queue: React.FC = () => {
   );
 };
 
-export default Queue;
+export default TableTemplate;
