@@ -1,20 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import wrapper from '../../../../store';
 import fetchQueueItem from '../../../../actions/fetchQueueItem';
-import RootState from '../../../../types/states';
 
 import AdminLayout from '../../../../layouts/admin/';
 import EditComponent from '../../../../components/admin/queue/edit/[id]';
 
 const Edit: React.FC = () => {
-  const item = useSelector(
-    (state: RootState) => state.queue_item,
-  );
-
-  console.log('item', item);
-
   return (
     <AdminLayout>
       <EditComponent />

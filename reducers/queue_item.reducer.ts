@@ -30,19 +30,13 @@ const queueItemReducer = (
 ) => {
   switch (action.type) {
     case HYDRATE:
-      const stateDiff = diff(state, action.payload) as any;
-      const wasBumpedOnClient = stateDiff?.page?.[0]?.endsWith(
-        'X',
-      ); // or any other criteria
+      // const stateDiff = diff(state, action.payload) as any;
+      // const wasBumpedOnClient =
+      //   stateDiff?.queue_item?.[0] === undefined;
       return Object.assign(
         {},
         state,
         action.payload.queue_item,
-        {
-          page: wasBumpedOnClient
-            ? state.page
-            : action.payload.page, // keep existing state or use hydrated
-        },
       );
 
     case FETCHING_QUEUE_ITEM:
