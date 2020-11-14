@@ -1,51 +1,50 @@
 import { Dispatch } from 'redux';
 
-import Auth from '../types/Auth';
-
 import axiosService from '../utils/axiosService';
 
 import {
-  AUTHENTICATION,
-  AUTHENTICATION_SUCCESS,
-  AUTHENTICATION_FAIL,
+  FETCHING_QUEUE_ITEM,
+  FETCHING_QUEUE_ITEM_SUCCESS,
+  FETCHING_QUEUE_ITEM_FAIL,
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
 import { sleep } from '../utils/functions';
+import { data } from '../components/admin/queue/table';
 
-const auth = (data: Auth) => {
+const fetchQueueItem = (id: number) => {
   return async (dispatch: Dispatch<any>) => {
-    dispatch({ type: AUTHENTICATION });
+    dispatch({ type: FETCHING_QUEUE_ITEM });
 
     return sleep(2000)
       .then(() => {
         dispatch({
-          type: AUTHENTICATION_SUCCESS,
-          payload: data,
+          type: FETCHING_QUEUE_ITEM_SUCCESS,
+          payload: data.find((el) => el.id === id),
         });
       })
       .catch((err) => {
         dispatch({
-          type: AUTHENTICATION_FAIL,
+          type: FETCHING_QUEUE_ITEM_FAIL,
           payload: err,
         });
       });
 
     // return axiosService
-    //   .get(API_ENDPOINTS.login)
+    //   .get(API_ENDPOINTS.queue)
     //   .then((res) => {
     //     dispatch({
-    //       type: AUTH_SUCCESS,
+    //       type: FETCHING_QUEUE_SUCCESS,
     //       payload: res.data,
     //     });
     //   })
     //   .catch((err) => {
     //     dispatch({
-    //       type: AUTH_FAIL,
+    //       type: FETCHING_QUEUE_FAIL,
     //       payload: err,
     //     });
     //   });
   };
 };
 
-export default auth;
+export default fetchQueueItem;

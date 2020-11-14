@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import FormTemplate from '../../form';
 
-const FormSizeDemo = () => {
+const EditById = () => {
   const router = useRouter();
   const [initialValues, setInitialValues] = useState({
     isOwner: true,
@@ -35,4 +35,4 @@ const FormSizeDemo = () => {
   );
 };
 
-export default FormSizeDemo;
+export default EditById;

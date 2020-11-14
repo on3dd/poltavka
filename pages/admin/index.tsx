@@ -4,8 +4,6 @@ import { useStore } from 'react-redux';
 import wrapper from '../../store';
 import fetchPosts from '../../actions/fetchPosts';
 
-import RootState from '../../types/states';
-
 import AdminLayout from '../../layouts/admin';
 import IndexComponent from '../../components/admin';
 

@@ -2,27 +2,29 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { diff } from 'jsondiffpatch';
 
 import {
-  AUTHENTICATION,
-  AUTHENTICATION_SUCCESS,
-  AUTHENTICATION_FAIL,
+  FETCHING_QUEUE_ITEM,
+  FETCHING_QUEUE_ITEM_SUCCESS,
+  FETCHING_QUEUE_ITEM_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
-import AuthState from '../types/states/auth';
+import QueueItemState from '../types/states/queue_item';
 
-const initialState: AuthState = {
+const initialState: QueueItemState = {
   data: {
-    password: '',
-    phone: '',
-    prefix: '+7',
-    remember: true,
+    driver: '',
+    product: '',
+    car_number: '',
+    car_owner: '',
+    car_location: '',
+    car_status: '',
   },
   isFetching: false,
   hasError: false,
   errorMessage: null,
 };
 
-const authReducer = (
+const queueItemReducer = (
   state = initialState,
   action: AsyncAction,
 ) => {
@@ -32,20 +34,25 @@ const authReducer = (
       const wasBumpedOnClient = stateDiff?.page?.[0]?.endsWith(
         'X',
       ); // or any other criteria
-      return Object.assign({}, state, action.payload.auth, {
-        page: wasBumpedOnClient
-          ? state.page
-          : action.payload.page, // keep existing state or use hydrated
-      });
+      return Object.assign(
+        {},
+        state,
+        action.payload.queue_item,
+        {
+          page: wasBumpedOnClient
+            ? state.page
+            : action.payload.page, // keep existing state or use hydrated
+        },
+      );
 
-    case AUTHENTICATION:
+    case FETCHING_QUEUE_ITEM:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
         errorMessage: null,
       });
 
-    case AUTHENTICATION_SUCCESS:
+    case FETCHING_QUEUE_ITEM_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -53,7 +60,7 @@ const authReducer = (
         errorMessage: null,
       });
 
-    case AUTHENTICATION_FAIL:
+    case FETCHING_QUEUE_ITEM_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
@@ -65,4 +72,4 @@ const authReducer = (
   }
 };
 
-export default authReducer;
+export default queueItemReducer;

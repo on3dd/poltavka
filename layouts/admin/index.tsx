@@ -192,7 +192,7 @@ const Admin: React.FC<LayoutProps> = ({
         </Layout.Content>
 
         <Layout.Footer style={{ textAlign: 'center' }}>
-          Poltavka ©2020 Создано командой ASAP ДВФУ
+          Полтавка © 2020 Создано командой ASAP ДВФУ
         </Layout.Footer>
       </Layout>
     </Layout>

@@ -1,7 +1,4 @@
 import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-
-import State from '../types/states/posts';
 
 import axiosService from '../utils/axiosService';
 

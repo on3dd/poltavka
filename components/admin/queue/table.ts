@@ -7,6 +7,7 @@ export const data: QueueItem[] = new Array(100)
   .fill(0)
   .map((_, idx) => ({
     key: idx,
+    id: idx + 1,
     number: idx + 1,
     registration_date: '13.11.2020, 17:23:21',
     country: 'Россия',
@@ -58,14 +59,3 @@ export const columns = [
     dataIndex: 'car_status',
   },
 ];
-
-// rowSelection object indicates the need for row selection
-export const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      'selectedRows: ',
-      selectedRows,
-    );
-  },
-};

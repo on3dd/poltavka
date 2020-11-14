@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { Row, Col, Space, Button, Table } from 'antd';
@@ -9,10 +9,13 @@ import {
 } from '@ant-design/icons';
 
 import RootState from '../../../types/states';
+import QueueItem from '../../../types/QueueItem';
 
-import { rowSelection, columns } from './table';
+import { columns } from './table';
 
 const Queue: React.FC = () => {
+  const [id, setId] = useState(null);
+
   const queue = useSelector(
     (state: RootState) => state.queue,
   );
@@ -24,11 +27,22 @@ const Queue: React.FC = () => {
   };
 
   const onEditClick = () => {
-    console.log('edit');
+    router.push(`/admin/queue/edit/${id}`);
   };
 
   const onDeleteClick = () => {
     console.log('delete');
+  };
+
+  // rowSelection object indicates the need for row selection
+  const rowSelection = {
+    onChange: (
+      selectedRowKeys: any[],
+      selectedRows: QueueItem[],
+    ) => {
+      console.log('id', selectedRows[0].id);
+      setId(selectedRows[0].id);
+    },
   };
 
   return (
@@ -51,6 +65,7 @@ const Queue: React.FC = () => {
             <Button
               type="default"
               icon={<EditOutlined />}
+              disabled={id === null}
               onClick={onEditClick}
             >
               Редактировать
