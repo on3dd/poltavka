@@ -1,12 +1,10 @@
 import { NextPage, NextComponentType } from 'next';
+import { AppProps } from 'next/app';
 import NextNProgress from 'nextjs-progressbar';
 
-import '../styles/antd.less';
+import wrapper from '../store';
 
-type AppProps = {
-  Component: NextComponentType;
-  pageProps: unknown;
-};
+import '../styles/antd.less';
 
 const App: NextPage<AppProps> = ({
   Component,
@@ -20,4 +18,4 @@ const App: NextPage<AppProps> = ({
   );
 };
 
-export default App;
+export default wrapper.withRedux(App);
