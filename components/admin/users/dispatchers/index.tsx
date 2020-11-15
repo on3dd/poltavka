@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import RootState from '../../../../types/states';
-import Dispatcher from '../../../../types/Dispatcher';
+import DispatcherType from '../../../../types/Dispatcher';
 
 import TableTemplate from '../table';
 
@@ -32,7 +32,7 @@ const Dispatchers: React.FC = () => {
   const rowSelection = {
     onChange: (
       selectedRowKeys: any[],
-      selectedRows: Dispatcher[],
+      selectedRows: DispatcherType[],
     ) => {
       console.log('id', selectedRows[0].id);
       setId(selectedRows[0].id);

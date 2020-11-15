@@ -1,8 +1,3 @@
-export default interface Dispatcher {
-  key?: number;
-  id?: number;
-  name: string;
-  country: string;
-  phone: string;
-  password?: string;
-}
+import User from './User';
+
+export default interface Dispatcher extends User {}

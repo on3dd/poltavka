@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import RootState from '../../../../types/states';
-import Administrator from '../../../../types/Administrator';
+import AdministratorType from '../../../../types/Administrator';
 
 import TableTemplate from '../table';
 
@@ -32,7 +32,7 @@ const Administrators: React.FC = () => {
   const rowSelection = {
     onChange: (
       selectedRowKeys: any[],
-      selectedRows: Administrator[],
+      selectedRows: AdministratorType[],
     ) => {
       console.log('id', selectedRows[0].id);
       setId(selectedRows[0].id);

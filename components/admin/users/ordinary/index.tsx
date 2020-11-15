@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import RootState from '../../../../types/states';
-import User from '../../../../types/User';
+import OrdinaryType from '../../../../types/Ordinary';
 
 import TableTemplate from '../table';
 
@@ -32,7 +32,7 @@ const Ordinary: React.FC = () => {
   const rowSelection = {
     onChange: (
       selectedRowKeys: any[],
-      selectedRows: User[],
+      selectedRows: OrdinaryType[],
     ) => {
       console.log('id', selectedRows[0].id);
       setId(selectedRows[0].id);

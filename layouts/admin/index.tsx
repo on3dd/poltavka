@@ -155,6 +155,7 @@ const Admin: React.FC<LayoutProps> = ({
           <Menu.Item
             key="/admin/news"
             icon={<ReadOutlined />}
+            disabled={true}
           >
             <Link href="/admin/news">
               <a>Новости</a>
@@ -164,6 +165,7 @@ const Admin: React.FC<LayoutProps> = ({
           <Menu.Item
             key="/admin/statistics"
             icon={<LineChartOutlined />}
+            disabled={true}
           >
             <Link href="/admin/statistics">
               <a>Статистика</a>

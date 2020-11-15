@@ -1,8 +1,8 @@
 import NextState from '../next';
-import User from '../../User';
+import Ordinary from '../../Ordinary';
 
 export default interface UserState extends NextState {
-  data: User;
+  data: Ordinary;
   isFetching: boolean;
   hasError: boolean;
   errorMessage: null | string;
