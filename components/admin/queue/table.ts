@@ -1,7 +1,5 @@
-import { capitalize } from '../../../utils/functions';
 import QueueItem from '../../../types/QueueItem';
-
-const capitalieTitle = (val: string) => capitalize(val);
+import { capitalizeText, reduceName } from '../../table';
 
 export const data: QueueItem[] = new Array(100)
   .fill(0)
@@ -13,7 +11,7 @@ export const data: QueueItem[] = new Array(100)
     country: 'Россия',
     car_number: 'a228уе322',
     product: 'Снюс',
-    driver: 'Ишутин А. Я.',
+    driver: 'Ишутин Артем Ягуарович',
     car_owner: 'OOO "Jaguar.Pro"',
     car_location: 'Российская Федерация',
     car_status: 'Убил негра',
@@ -31,7 +29,7 @@ export const columns = [
   {
     title: 'Страна',
     dataIndex: 'country',
-    render: capitalieTitle,
+    render: capitalizeText,
   },
   {
     title: 'Номер авто',
@@ -40,11 +38,12 @@ export const columns = [
   {
     title: 'Товар',
     dataIndex: 'product',
-    render: capitalieTitle,
+    render: capitalizeText,
   },
   {
     title: 'Водитель',
     dataIndex: 'driver',
+    render: reduceName,
   },
   {
     title: 'Собственник',
