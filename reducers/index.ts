@@ -7,6 +7,8 @@ import usersReducer from './users.reducer';
 import userReducer from './user.reducer';
 import dispatchersReducer from './dispatchers.reducer';
 import dispatcherReducer from './dispatcher.reducer';
+import administratorsReducer from './administrators.reducer';
+import administratorReducer from './administrator.reducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -16,4 +18,6 @@ export default combineReducers({
   user: userReducer,
   dispatchers: dispatchersReducer,
   dispatcher: dispatcherReducer,
+  administrators: administratorsReducer,
+  administrator: administratorReducer,
 });

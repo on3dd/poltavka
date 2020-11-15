@@ -5,6 +5,8 @@ import UsersState from './users';
 import UserState from './user';
 import DispatchersState from './dispatchers';
 import DispatcherState from './dispatcher';
+import AdministratorsState from './administrators';
+import AdministratorState from './administrator';
 
 export default interface RootState {
   auth: AuthState;
@@ -14,4 +16,6 @@ export default interface RootState {
   user: UserState;
   dispatchers: DispatchersState;
   dispatcher: DispatcherState;
+  administrators: AdministratorsState;
+  administrator: AdministratorState;
 }

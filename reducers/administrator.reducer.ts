@@ -2,15 +2,15 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { diff } from 'jsondiffpatch';
 
 import {
-  FETCHING_DISPATCHER,
-  FETCHING_DISPATCHER_SUCCESS,
-  FETCHING_DISPATCHER_FAIL,
+  FETCHING_ADMINISTRATOR,
+  FETCHING_ADMINISTRATOR_SUCCESS,
+  FETCHING_ADMINISTRATOR_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
-import DispatcherState from '../types/states/dispatcher';
+import AdministratorState from '../types/states/administrator';
 
-const initialState: DispatcherState = {
+const initialState: AdministratorState = {
   data: {
     name: '',
     country: '',
@@ -21,7 +21,7 @@ const initialState: DispatcherState = {
   errorMessage: null,
 };
 
-const dispatcherReducer = (
+const administratorReducer = (
   state = initialState,
   action: AsyncAction,
 ) => {
@@ -29,17 +29,21 @@ const dispatcherReducer = (
     case HYDRATE:
       // const stateDiff = diff(state, action.payload) as any;
       // const wasBumpedOnClient =
-      //   stateDiff?.dispatcher?.[0] === undefined;
-      return Object.assign({}, state, action.payload.dispatcher);
+      //   stateDiff?.administrator?.[0] === undefined;
+      return Object.assign(
+        {},
+        state,
+        action.payload.administrator,
+      );
 
-    case FETCHING_DISPATCHER:
+    case FETCHING_ADMINISTRATOR:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
         errorMessage: null,
       });
 
-    case FETCHING_DISPATCHER_SUCCESS:
+    case FETCHING_ADMINISTRATOR_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -47,7 +51,7 @@ const dispatcherReducer = (
         errorMessage: null,
       });
 
-    case FETCHING_DISPATCHER_FAIL:
+    case FETCHING_ADMINISTRATOR_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
@@ -59,4 +63,4 @@ const dispatcherReducer = (
   }
 };
 
-export default dispatcherReducer;
+export default administratorReducer;
