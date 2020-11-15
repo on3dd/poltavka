@@ -41,6 +41,7 @@ const Dispatchers: React.FC = () => {
 
   return (
     <TableTemplate
+      id={id}
       dataSource={dispatchers.data}
       rowSelection={rowSelection}
       onAddClick={onAddClick}

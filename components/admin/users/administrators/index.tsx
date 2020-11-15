@@ -41,6 +41,7 @@ const Administrators: React.FC = () => {
 
   return (
     <TableTemplate
+      id={id}
       dataSource={administrators.data}
       rowSelection={rowSelection}
       onAddClick={onAddClick}

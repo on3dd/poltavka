@@ -7,7 +7,9 @@ export const data = new Array(100)
     id: idx + 1,
     number: idx + 1,
     name: 'Путин Владимир Владимирович',
-    phone_number: '+7 (900) 322-14-88',
+    country: 'Российская Федерация',
+    phone: '+7 (900) 322-14-88',
+    password: 'N16g.R',
     registration_date: '13.11.2020, 17:23:21',
     added_by: 'Обама Барак Хуссейн',
   }));
@@ -24,7 +26,7 @@ export const columns = [
   },
   {
     title: 'Номер телефона',
-    dataIndex: 'phone_number',
+    dataIndex: 'phone',
   },
   {
     title: 'Дата регистрации',

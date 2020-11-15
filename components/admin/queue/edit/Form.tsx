@@ -166,7 +166,9 @@ const EditForm: React.FC<EditFormProps> = ({
           htmlType="submit"
           icon={<UserAddOutlined />}
         >
-          Добавить в очередь
+          {initialValues.id
+            ? 'Изменить пользователя в очереди'
+            : 'Добавить пользователя в очередь'}
         </Button>
       </Form.Item>
     </Form>

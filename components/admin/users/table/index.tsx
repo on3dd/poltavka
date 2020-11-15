@@ -9,6 +9,7 @@ import {
 import { columns } from './config';
 
 type TableTemplateProps = {
+  id: number | null;
   dataSource: any[];
   rowSelection: any;
   onAddClick: () => void;
@@ -17,6 +18,7 @@ type TableTemplateProps = {
 };
 
 const TableTemplate: React.FC<TableTemplateProps> = ({
+  id,
   dataSource,
   rowSelection,
   onAddClick,
@@ -42,6 +44,7 @@ const TableTemplate: React.FC<TableTemplateProps> = ({
           <Space>
             <Button
               type="default"
+              disabled={id === null}
               icon={<EditOutlined />}
               onClick={onEditClick}
             >
@@ -50,6 +53,7 @@ const TableTemplate: React.FC<TableTemplateProps> = ({
             <Button
               type="primary"
               danger={true}
+              disabled={id === null}
               icon={<DeleteOutlined />}
               onClick={onDeleteClick}
             >

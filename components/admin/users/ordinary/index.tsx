@@ -41,6 +41,7 @@ const Ordinary: React.FC = () => {
 
   return (
     <TableTemplate
+      id={id}
       dataSource={users.data}
       rowSelection={rowSelection}
       onAddClick={onAddClick}

@@ -64,8 +64,8 @@ const Queue: React.FC = () => {
           <Space>
             <Button
               type="default"
-              icon={<EditOutlined />}
               disabled={id === null}
+              icon={<EditOutlined />}
               onClick={onEditClick}
             >
               Редактировать
@@ -73,6 +73,7 @@ const Queue: React.FC = () => {
             <Button
               type="primary"
               danger={true}
+              disabled={id === null}
               icon={<DeleteOutlined />}
               onClick={onDeleteClick}
             >
