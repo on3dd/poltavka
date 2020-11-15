@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
 
 import Auth from '../types/Auth';
 
@@ -14,7 +14,7 @@ import { API_ENDPOINTS } from '../utils/constants';
 import { sleep } from '../utils/functions';
 
 const auth = (data: Auth) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: AUTHENTICATION });
 
     return sleep(2000)

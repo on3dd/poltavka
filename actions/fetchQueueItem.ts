@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
 
 import axiosService from '../utils/axiosService';
 
@@ -13,7 +13,7 @@ import { sleep } from '../utils/functions';
 import { data } from '../components/admin/queue/table';
 
 const fetchQueueItem = (id: number) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: FETCHING_QUEUE_ITEM });
 
     return sleep(2000)
