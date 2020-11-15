@@ -8,8 +8,8 @@ import {
 } from 'next-redux-wrapper';
 
 import Action from '../types/Action';
-import RootState from '../types/states/index';
-import rootReducer from '../reducers/index';
+import RootState from '../types/states';
+import rootReducer from '../reducers';
 
 const middleware = applyMiddleware(
   thunk as ThunkMiddleware<RootState, Action>,

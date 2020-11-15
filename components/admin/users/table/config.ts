@@ -2,6 +2,7 @@ export const data = new Array(100)
   .fill(0)
   .map((_, idx) => ({
     key: idx,
+    id: idx + 1,
     number: idx + 1,
     name: 'Путин В. В.',
     phone_number: '+7 (900) 322-14-88',
@@ -31,14 +32,3 @@ export const columns = [
     dataIndex: 'added_by',
   },
 ];
-
-// rowSelection object indicates the need for row selection
-export const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      'selectedRows: ',
-      selectedRows,
-    );
-  },
-};

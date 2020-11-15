@@ -6,15 +6,19 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons';
 
-import { rowSelection, columns, data } from './config';
+import { columns } from './config';
 
 type TableTemplateProps = {
+  dataSource: any[];
+  rowSelection: any;
   onAddClick: () => void;
   onEditClick: () => void;
   onDeleteClick: () => void;
 };
 
 const TableTemplate: React.FC<TableTemplateProps> = ({
+  dataSource,
+  rowSelection,
   onAddClick,
   onEditClick,
   onDeleteClick,
@@ -57,7 +61,7 @@ const TableTemplate: React.FC<TableTemplateProps> = ({
       <Table
         size="large"
         columns={columns}
-        dataSource={data}
+        dataSource={dataSource}
         rowSelection={{
           type: 'radio',
           ...rowSelection,

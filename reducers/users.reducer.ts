@@ -2,22 +2,22 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { diff } from 'jsondiffpatch';
 
 import {
-  FETCHING_QUEUE,
-  FETCHING_QUEUE_SUCCESS,
-  FETCHING_QUEUE_FAIL,
+  FETCHING_USERS,
+  FETCHING_USERS_SUCCESS,
+  FETCHING_USERS_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
-import QueueState from '../types/states/queue';
+import UsersState from '../types/states/users';
 
-const initialState: QueueState = {
+const initialState: UsersState = {
   data: [],
   isFetching: false,
   hasError: false,
   errorMessage: null,
 };
 
-const queueReducer = (
+const usersReducer = (
   state = initialState,
   action: AsyncAction,
 ) => {
@@ -27,16 +27,16 @@ const queueReducer = (
       // const wasBumpedOnClient = stateDiff?.page?.[0]?.endsWith(
       //   'X',
       // ); // or any other criteria
-      return Object.assign({}, state, action.payload.queue);
+      return Object.assign({}, state, action.payload.users);
 
-    case FETCHING_QUEUE:
+    case FETCHING_USERS:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
         errorMessage: null,
       });
 
-    case FETCHING_QUEUE_SUCCESS:
+    case FETCHING_USERS_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -44,7 +44,7 @@ const queueReducer = (
         errorMessage: null,
       });
 
-    case FETCHING_QUEUE_FAIL:
+    case FETCHING_USERS_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
@@ -56,4 +56,4 @@ const queueReducer = (
   }
 };
 
-export default queueReducer;
+export default usersReducer;
