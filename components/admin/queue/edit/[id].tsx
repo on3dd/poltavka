@@ -11,10 +11,12 @@ import {
 } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
 
-import fetchQueueItem from '../../../../actions/fetchQueueItem';
 import RootState from '../../../../types/states';
+import QueueItem from '../../../../types/QueueItem';
 
-const EditById = () => {
+import EditForm from './Form';
+
+const EditById: React.FC = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -45,7 +47,7 @@ const EditById = () => {
     setInitialValues(() => ({ ...values }));
   };
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: QueueItem) => {
     console.log('Success:', values);
 
     router.push('/admin');
@@ -56,81 +58,13 @@ const EditById = () => {
   };
 
   return (
-    <Form
-      name="new"
-      size="large"
-      layout="vertical"
+    <EditForm
       form={form}
       initialValues={initialValues}
       onValuesChange={onValuesChange}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      // validateMessages={validateMessages}
-    >
-      <Form.Item name="number" label="Номер в очереди">
-        <InputNumber />
-      </Form.Item>
-
-      <Form.Item name="driver" label="Водитель">
-        <Select>
-          <Select.Option value="Путин В. В.">
-            Владимир Владимирович Путин
-          </Select.Option>
-          <Select.Option value="Обама Б. Х.">
-            Барак Хуссейн Обама
-          </Select.Option>
-          <Select.Option value="Ишутин А. Я.">
-            Ишутин Артем Ягуарович
-          </Select.Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item name="car_number" label="Номер автомобиля">
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="isOwner"
-        valuePropName="checked"
-        label="Водитель - собственник автомобиля"
-      >
-        <Switch />
-      </Form.Item>
-
-      {!initialValues.isOwner && (
-        <Form.Item
-          name="car_owner"
-          label="Собственник автомобиля"
-        >
-          <Input />
-        </Form.Item>
-      )}
-
-      <Form.Item name="product" label="Товар">
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="car_location"
-        label="Местоположение автомобиля"
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item name="car_status" label="Статус">
-        <Input />
-      </Form.Item>
-
-      <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          icon={<UserAddOutlined />}
-        >
-          Добавить в очередь
-        </Button>
-      </Form.Item>
-    </Form>
+    />
   );
 };
 

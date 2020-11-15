@@ -10,15 +10,7 @@ import { parsePhoneNumber } from 'libphonenumber-js/mobile';
 
 import Auth from '../../types/Auth';
 
-const validateMessages = {
-  required: '${label} не может быть пустым!',
-  whitespace: '${label} не может быть пустым!',
-  string: {
-    len: '${label} должен состоять из ${len} символов!',
-    min: '${label} должен быть длиной от ${min} символов!',
-    max: '${label} должен быть длиной до ${max} characters',
-  },
-};
+import { validateMessages, phoneValidator } from '../form';
 
 type LoginFormProps = {
   initialValues: Auth;
@@ -65,16 +57,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             max: 15,
             message:
               'Пожалуйста, заполните ваш номер телефона!',
-            validator: (_, value) => {
-              try {
-                const phone = parsePhoneNumber(value, 'RU');
-                return phone.isValid()
-                  ? Promise.resolve()
-                  : Promise.reject();
-              } catch (err) {
-                return Promise.reject();
-              }
-            },
+            validator: phoneValidator,
           },
         ]}
       >
