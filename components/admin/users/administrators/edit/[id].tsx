@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { Form } from 'antd';
 
 import RootState from '../../../../../types/states';
 import AdministratorType from '../../../../../types/Administrator';
 
+import createAdministrator from '../../../../../actions/createAdministrator';
+import updateAdministrator from '../../../../../actions/updateAdministrator';
+
 import FormTemplate from '../../form';
 
 const EditById = () => {
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const administrator = useSelector(
     (state: RootState) => state.administrator,
@@ -24,7 +33,10 @@ const EditById = () => {
   useEffect(() => {
     console.log('useEffect');
 
-    setInitialValues(() => administrator.data);
+    setInitialValues((prev) => ({
+      ...prev,
+      ...administrator.data,
+    }));
 
     form.setFieldsValue(administrator.data);
   }, [administrator.data]);
@@ -32,18 +44,37 @@ const EditById = () => {
   const onValuesChange = (values: any) => {
     console.log('onvaluechange', values);
 
-    setInitialValues(values);
+    setInitialValues((prev) => ({
+      ...prev,
+      ...values,
+    }));
   };
 
-  const onFinish = (values: AdministratorType) => {
+  const submitFunction = useCallback(
+    (values) => {
+      return initialValues.id
+        ? updateAdministrator(values)
+        : createAdministrator(values);
+    },
+    [initialValues.id],
+  );
+
+  const onFinish = async (values: AdministratorType) => {
     console.log('Success:', values);
 
-    router.push('/admin');
+    await dispatch(submitFunction(values));
+
+    // if (initialValues.id) {
+    //   await router.push(
+    //     `/admin/users/administrators/edit/${initialValues.id}`,
+    //   );
+    // }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
   return (
     <FormTemplate
       form={form}

@@ -5,6 +5,12 @@ import {
   FETCHING_ADMINISTRATOR,
   FETCHING_ADMINISTRATOR_SUCCESS,
   FETCHING_ADMINISTRATOR_FAIL,
+  CREATING_ADMINISTRATOR,
+  CREATING_ADMINISTRATOR_SUCCESS,
+  CREATING_ADMINISTRATOR_FAIL,
+  UPDATING_ADMINISTRATOR,
+  UPDATING_ADMINISTRATOR_SUCCESS,
+  UPDATING_ADMINISTRATOR_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
@@ -38,6 +44,8 @@ const administratorReducer = (
       );
 
     case FETCHING_ADMINISTRATOR:
+    case CREATING_ADMINISTRATOR:
+    case UPDATING_ADMINISTRATOR:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
@@ -45,6 +53,8 @@ const administratorReducer = (
       });
 
     case FETCHING_ADMINISTRATOR_SUCCESS:
+    case CREATING_ADMINISTRATOR_SUCCESS:
+    case UPDATING_ADMINISTRATOR_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -53,6 +63,8 @@ const administratorReducer = (
       });
 
     case FETCHING_ADMINISTRATOR_FAIL:
+    case CREATING_ADMINISTRATOR_FAIL:
+    case UPDATING_ADMINISTRATOR_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
