@@ -11,6 +11,9 @@ import {
   UPDATING_ADMINISTRATOR,
   UPDATING_ADMINISTRATOR_SUCCESS,
   UPDATING_ADMINISTRATOR_FAIL,
+  DELETING_ADMINISTRATOR,
+  DELETING_ADMINISTRATOR_SUCCESS,
+  DELETING_ADMINISTRATOR_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
@@ -46,6 +49,7 @@ const administratorReducer = (
     case FETCHING_ADMINISTRATOR:
     case CREATING_ADMINISTRATOR:
     case UPDATING_ADMINISTRATOR:
+    case DELETING_ADMINISTRATOR:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
@@ -55,6 +59,7 @@ const administratorReducer = (
     case FETCHING_ADMINISTRATOR_SUCCESS:
     case CREATING_ADMINISTRATOR_SUCCESS:
     case UPDATING_ADMINISTRATOR_SUCCESS:
+    case DELETING_ADMINISTRATOR_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -65,6 +70,7 @@ const administratorReducer = (
     case FETCHING_ADMINISTRATOR_FAIL:
     case CREATING_ADMINISTRATOR_FAIL:
     case UPDATING_ADMINISTRATOR_FAIL:
+    case DELETING_ADMINISTRATOR_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,

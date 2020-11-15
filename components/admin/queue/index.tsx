@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { Row, Col, Space, Button, Table } from 'antd';
+import {
+  Row,
+  Col,
+  Space,
+  Button,
+  Table,
+  Modal,
+  Typography,
+} from 'antd';
 import {
   UserAddOutlined,
   EditOutlined,
   DeleteOutlined,
 } from '@ant-design/icons';
+
+import deleteQueueItem from '../../../actions/deleteQueueItem';
 
 import RootState from '../../../types/states';
 import QueueItem from '../../../types/QueueItem';
@@ -15,12 +29,19 @@ import { columns } from './table';
 
 const Queue: React.FC = () => {
   const [id, setId] = useState(null);
+  const [visible, setVisible] = useState(false);
+
+  const dispatch = useDispatch();
 
   const queue = useSelector(
     (state: RootState) => state.queue,
   );
 
   const router = useRouter();
+
+  const confirmLoading = useMemo(() => {
+    return queue.isFetching;
+  }, [queue.isFetching]);
 
   const onAddClick = () => {
     router.push('/admin/queue/edit/new');
@@ -30,9 +51,27 @@ const Queue: React.FC = () => {
     router.push(`/admin/queue/edit/${id}`);
   };
 
-  const onDeleteClick = () => {
-    console.log('delete');
-  };
+  const openModal = useCallback(() => {
+    setVisible(() => true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setVisible(() => false);
+  }, []);
+
+  const onDeleteClick = useCallback(() => {
+    openModal();
+  }, []);
+
+  const handleOk = useCallback(async () => {
+    await dispatch(deleteQueueItem(id));
+
+    closeModal();
+  }, []);
+
+  const handleCancel = useCallback(() => {
+    closeModal();
+  }, []);
 
   // rowSelection object indicates the need for row selection
   const rowSelection = {
@@ -91,6 +130,22 @@ const Queue: React.FC = () => {
           ...rowSelection,
         }}
       />
+      <Modal
+        title="Предупреждение"
+        okText="Подтвердить"
+        cancelText="Отмена"
+        visible={visible}
+        confirmLoading={confirmLoading}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Typography.Paragraph>
+          Вы уверенны, что хотите удалить данный элемент?
+        </Typography.Paragraph>
+        <Typography.Paragraph>
+          Последствия этого действия необратимы.
+        </Typography.Paragraph>
+      </Modal>
     </>
   );
 };

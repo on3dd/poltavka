@@ -11,6 +11,9 @@ import {
   UPDATING_USER,
   UPDATING_USER_SUCCESS,
   UPDATING_USER_FAIL,
+  DELETING_USER,
+  DELETING_USER_SUCCESS,
+  DELETING_USER_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
@@ -42,6 +45,7 @@ const userReducer = (
     case FETCHING_USER:
     case CREATING_USER:
     case UPDATING_USER:
+    case DELETING_USER:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
@@ -51,6 +55,7 @@ const userReducer = (
     case FETCHING_USER_SUCCESS:
     case CREATING_USER_SUCCESS:
     case UPDATING_USER_SUCCESS:
+    case DELETING_USER_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -61,6 +66,7 @@ const userReducer = (
     case FETCHING_USER_FAIL:
     case CREATING_USER_FAIL:
     case UPDATING_USER_FAIL:
+    case DELETING_USER_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,

@@ -12,6 +12,7 @@ import QueueItem from '../../../../types/QueueItem';
 
 import createQueueItem from '../../../../actions/createQueueItem';
 import updateQueueItem from '../../../../actions/updateQueueItem';
+import deleteQueueItem from '../../../../actions/deleteQueueItem';
 
 import EditForm from './Form';
 
