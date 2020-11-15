@@ -21,6 +21,7 @@ const initialState: UserState = {
     name: '',
     country: '',
     phone: '',
+    prefix: '+7',
   },
   isFetching: false,
   hasError: false,

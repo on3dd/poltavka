@@ -15,6 +15,7 @@ const initialState: AdministratorState = {
     name: '',
     country: '',
     phone: '',
+    prefix: '+7',
   },
   isFetching: false,
   hasError: false,

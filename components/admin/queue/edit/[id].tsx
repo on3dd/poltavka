@@ -64,11 +64,11 @@ const EditById: React.FC = () => {
 
     await dispatch(submitFunction(values));
 
-    if (initialValues.id) {
-      await router.push(
-        `/admin/queue/edit/${initialValues.id}`,
-      );
-    }
+    // if (initialValues.id) {
+    //   await router.push(
+    //     `/admin/queue/edit/${initialValues.id}`,
+    //   );
+    // }
   };
 
   const onFinishFailed = (errorInfo: any) => {

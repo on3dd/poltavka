@@ -5,8 +5,10 @@ export const validateMessages = {
   whitespace: '"${label}" не может быть пустым!',
   string: {
     len: '"${label}" должен состоять из ${len} символов!',
-    min: '"${label}" должен быть длиной от ${min} символов!',
-    max: '"${label}" должен быть длиной до ${max} characters',
+    min:
+      '"${label}" должен быть длиной от ${min} символов!',
+    max:
+      '"${label}" должен быть длиной до ${max} characters',
   },
 };
 

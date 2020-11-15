@@ -15,6 +15,7 @@ const initialState: DispatcherState = {
     name: '',
     country: '',
     phone: '',
+    prefix: '+7',
   },
   isFetching: false,
   hasError: false,
@@ -30,7 +31,11 @@ const dispatcherReducer = (
       // const stateDiff = diff(state, action.payload) as any;
       // const wasBumpedOnClient =
       //   stateDiff?.dispatcher?.[0] === undefined;
-      return Object.assign({}, state, action.payload.dispatcher);
+      return Object.assign(
+        {},
+        state,
+        action.payload.dispatcher,
+      );
 
     case FETCHING_DISPATCHER:
       return Object.assign({}, state, {

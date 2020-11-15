@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  Form,
-  Select,
-  Input,
-  Button,
-  Checkbox,
-} from 'antd';
-import { parsePhoneNumber } from 'libphonenumber-js/mobile';
+import { Form, Input, Button, Checkbox } from 'antd';
 
 import Auth from '../../types/Auth';
 
-import { validateMessages, phoneValidator } from '../form';
+import { validateMessages, phoneValidator } from './index';
+import PrefixSelector from './prefix';
 
 type LoginFormProps = {
   initialValues: Auth;
@@ -25,14 +19,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
   onFinish,
   onFinishFailed,
 }: LoginFormProps) => {
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Select.Option value="7">+7</Select.Option>
-      </Select>
-    </Form.Item>
-  );
-
   return (
     <Form
       name="login"
@@ -50,9 +36,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
         name="phone"
         rules={[
           {
+            type: 'string',
             required: true,
             whitespace: true,
-            type: 'string',
             min: 10,
             max: 15,
             message:
@@ -62,7 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         ]}
       >
         <Input
-          addonBefore={prefixSelector}
+          addonBefore={PrefixSelector}
           style={{ width: '100%' }}
         />
       </Form.Item>
@@ -72,9 +58,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
         name="password"
         rules={[
           {
+            type: 'string',
             required: true,
             whitespace: true,
-            type: 'string',
             len: 6,
             // message: 'Пожалуйста, введите ваш пароль!',
           },

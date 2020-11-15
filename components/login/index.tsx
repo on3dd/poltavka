@@ -7,7 +7,7 @@ import { Typography } from 'antd';
 import Auth from '../../types/Auth';
 import auth from '../../actions/auth';
 
-import LoginForm from './Form';
+import LoginForm from '../form/Form';
 
 const Div = styled.div``;
 

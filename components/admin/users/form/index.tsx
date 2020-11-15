@@ -16,6 +16,11 @@ import User from '../../../../types/User';
 import Dispatcher from '../../../../types/Dispatcher';
 import Administrator from '../../../../types/Administrator';
 
+import {
+  validateMessages,
+  phoneValidator,
+} from '../../../form/index';
+import PrefixSelector from '../../../form/prefix';
 import { generatePassword } from './config';
 
 type FormTemplateProps = {
@@ -43,13 +48,32 @@ const FormTemplate: React.FC<FormTemplateProps> = ({
       onValuesChange={onValuesChange}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      // validateMessages={validateMessages}
+      validateMessages={validateMessages}
     >
-      <Form.Item name="name" label="ФИО">
+      <Form.Item
+        name="name"
+        label="ФИО"
+        rules={[
+          {
+            type: 'string',
+            required: true,
+            whitespace: true,
+          },
+        ]}
+      >
         <Input />
       </Form.Item>
 
-      <Form.Item name="country" label="Гражданство">
+      <Form.Item
+        name="country"
+        label="Гражданство"
+        rules={[
+          {
+            type: 'string',
+            required: true,
+          },
+        ]}
+      >
         <Select>
           <Select.Option value="russia">
             Российская Федерация
@@ -60,12 +84,40 @@ const FormTemplate: React.FC<FormTemplateProps> = ({
         </Select>
       </Form.Item>
 
-      <Form.Item name="phone" label="Номер телефона">
-        <Input />
+      <Form.Item
+        name="phone"
+        label="Номер телефона"
+        rules={[
+          {
+            type: 'string',
+            required: true,
+            whitespace: true,
+            min: 10,
+            max: 15,
+            message: 'Некорректный номер телефона!',
+            validator: phoneValidator,
+          },
+        ]}
+      >
+        <Input
+          addonBefore={<PrefixSelector />}
+          style={{ width: '100%' }}
+        />
       </Form.Item>
 
       {!initialValues.id && (
-        <Form.Item name="password" label="Пароль">
+        <Form.Item
+          name="password"
+          label="Пароль"
+          rules={[
+            {
+              type: 'string',
+              required: true,
+              whitespace: true,
+              len: 6,
+            },
+          ]}
+        >
           <Row justify="space-between">
             <Col flex="auto">
               <Input.Password />

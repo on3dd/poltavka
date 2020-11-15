@@ -93,6 +93,7 @@ const Admin: React.FC<LayoutProps> = ({
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Layout.Sider
+        trigger={null}
         theme="light"
         collapsible
         collapsed={collapsed}
