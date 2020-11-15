@@ -5,6 +5,12 @@ import {
   FETCHING_DISPATCHER,
   FETCHING_DISPATCHER_SUCCESS,
   FETCHING_DISPATCHER_FAIL,
+  CREATING_DISPATCHER,
+  CREATING_DISPATCHER_SUCCESS,
+  CREATING_DISPATCHER_FAIL,
+  UPDATING_DISPATCHER,
+  UPDATING_DISPATCHER_SUCCESS,
+  UPDATING_DISPATCHER_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
@@ -38,6 +44,8 @@ const dispatcherReducer = (
       );
 
     case FETCHING_DISPATCHER:
+    case CREATING_DISPATCHER:
+    case UPDATING_DISPATCHER:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
@@ -45,6 +53,8 @@ const dispatcherReducer = (
       });
 
     case FETCHING_DISPATCHER_SUCCESS:
+    case CREATING_DISPATCHER_SUCCESS:
+    case UPDATING_DISPATCHER_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -53,6 +63,8 @@ const dispatcherReducer = (
       });
 
     case FETCHING_DISPATCHER_FAIL:
+    case CREATING_DISPATCHER_FAIL:
+    case UPDATING_DISPATCHER_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
