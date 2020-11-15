@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { Form } from 'antd';
 
 import RootState from '../../../../types/states';
 import QueueItem from '../../../../types/QueueItem';
 
+import createQueueItem from '../../../../actions/createQueueItem';
+import updateQueueItem from '../../../../actions/updateQueueItem';
+
 import EditForm from './Form';
 
 const EditById: React.FC = () => {
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const queue_item = useSelector(
     (state: RootState) => state.queue_item,
@@ -22,9 +31,12 @@ const EditById: React.FC = () => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    console.log('useEffect');
+    console.log('useEffect', queue_item.data);
 
-    setInitialValues(() => queue_item.data);
+    setInitialValues((prev) => ({
+      ...prev,
+      ...queue_item.data,
+    }));
 
     form.setFieldsValue(queue_item.data);
   }, [queue_item.data]);
@@ -32,13 +44,31 @@ const EditById: React.FC = () => {
   const onValuesChange = (values: any) => {
     console.log('onValuesChange', values);
 
-    setInitialValues(() => ({ ...values }));
+    setInitialValues((prev) => ({
+      ...prev,
+      ...values,
+    }));
   };
 
-  const onFinish = (values: QueueItem) => {
+  const submitFunction = useCallback(
+    (values) => {
+      return initialValues.id
+        ? updateQueueItem(values)
+        : createQueueItem(values);
+    },
+    [initialValues.id],
+  );
+
+  const onFinish = async (values: QueueItem) => {
     console.log('Success:', values);
 
-    router.push('/admin');
+    await dispatch(submitFunction(values));
+
+    if (initialValues.id) {
+      await router.push(
+        `/admin/queue/edit/${initialValues.id}`,
+      );
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {

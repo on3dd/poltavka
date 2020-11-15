@@ -5,6 +5,12 @@ import {
   FETCHING_QUEUE_ITEM,
   FETCHING_QUEUE_ITEM_SUCCESS,
   FETCHING_QUEUE_ITEM_FAIL,
+  CREATING_QUEUE_ITEM,
+  CREATING_QUEUE_ITEM_SUCCESS,
+  CREATING_QUEUE_ITEM_FAIL,
+  UPDATING_QUEUE_ITEM,
+  UPDATING_QUEUE_ITEM_SUCCESS,
+  UPDATING_QUEUE_ITEM_FAIL,
 } from '../utils/actionTypes';
 
 import AsyncAction from '../types/AsyncAction';
@@ -40,6 +46,8 @@ const queueItemReducer = (
       );
 
     case FETCHING_QUEUE_ITEM:
+    case CREATING_QUEUE_ITEM:
+    case UPDATING_QUEUE_ITEM:
       return Object.assign({}, state, {
         isFetching: true,
         hasError: false,
@@ -47,6 +55,8 @@ const queueItemReducer = (
       });
 
     case FETCHING_QUEUE_ITEM_SUCCESS:
+    case CREATING_QUEUE_ITEM_SUCCESS:
+    case UPDATING_QUEUE_ITEM_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -55,6 +65,8 @@ const queueItemReducer = (
       });
 
     case FETCHING_QUEUE_ITEM_FAIL:
+    case CREATING_QUEUE_ITEM_FAIL:
+    case UPDATING_QUEUE_ITEM_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
