@@ -17,11 +17,11 @@ const Ordinary: React.FC = () => {
   const router = useRouter();
 
   const onAddClick = () => {
-    router.push('/admin/queue/edit/new');
+    router.push('/admin/users/ordinary/edit/new');
   };
 
   const onEditClick = () => {
-    router.push(`/admin/queue/edit/${id}`);
+    router.push(`/admin/users/ordinary/edit/${id}`);
   };
 
   const onDeleteClick = () => {

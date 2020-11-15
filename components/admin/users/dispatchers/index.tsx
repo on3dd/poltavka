@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+
+import RootState from '../../../../types/states';
+import Dispatcher from '../../../../types/Dispatcher';
 
 import TableTemplate from '../table';
 
 const Dispatchers: React.FC = () => {
+  const [id, setId] = useState(null);
+
+  const dispatchers = useSelector(
+    (state: RootState) => state.dispatchers,
+  );
+
   const router = useRouter();
 
   const onAddClick = () => {
@@ -11,15 +21,28 @@ const Dispatchers: React.FC = () => {
   };
 
   const onEditClick = () => {
-    console.log('edit');
+    router.push(`/admin/users/dispatchers/edit/${id}`);
   };
 
   const onDeleteClick = () => {
     console.log('delete');
   };
 
+  // rowSelection object indicates the need for row selection
+  const rowSelection = {
+    onChange: (
+      selectedRowKeys: any[],
+      selectedRows: Dispatcher[],
+    ) => {
+      console.log('id', selectedRows[0].id);
+      setId(selectedRows[0].id);
+    },
+  };
+
   return (
     <TableTemplate
+      dataSource={dispatchers.data}
+      rowSelection={rowSelection}
       onAddClick={onAddClick}
       onEditClick={onEditClick}
       onDeleteClick={onDeleteClick}
