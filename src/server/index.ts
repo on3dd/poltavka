@@ -1,5 +1,10 @@
 import path from 'path';
 
+require('dotenv').config({
+  path: path.join(__dirname, '../../.env'),
+});
+
+import Db from './db';
 import Server from './server';
 
 import { logger } from './shared/Logger';
@@ -8,24 +13,31 @@ import ErrorHandler from './shared/ErrorHandler';
 
 import conf from '../next.config';
 
-const port = Number(process.env.PORT) || 3000;
+const url = String(process.env.DB_URL || '');
+const port = Number(process.env.PORT || 3000);
+
+console.log('url', url);
 
 const dev = String(process.env.NODE_ENV) !== 'production';
 const dir = path.join(__dirname, '../client');
 
-
+const db = Db.getInstance();
 const server = Server.getInstance({ dev, conf, dir });
+
 const errorHandler = ErrorHandler.getInstance();
+
+const startDb = async () => {
+  await db.connect(url);
+};
 
 const startServer = async () => {
   await server.prepare();
   await server.start(port);
-
-  logger.info(`Serving at http://localhost:${port}`);
 };
 
 const bootstrap = async () => {
   try {
+    await startDb();
     await startServer();
   } catch (err) {
     throw new AppError('Error starting server', err, false);
