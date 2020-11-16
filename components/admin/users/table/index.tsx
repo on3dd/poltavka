@@ -7,23 +7,31 @@ import {
 } from '@ant-design/icons';
 
 import { columns } from './config';
+import {
+  ModalTemplate,
+  ModalTemplateProps,
+} from '../../../shared/Modal';
 
-type TableTemplateProps = {
+interface TableTemplateProps extends ModalTemplateProps {
   id: number | null;
   dataSource: any[];
   rowSelection: any;
   onAddClick: () => void;
   onEditClick: () => void;
   onDeleteClick: () => void;
-};
+}
 
 const TableTemplate: React.FC<TableTemplateProps> = ({
   id,
   dataSource,
   rowSelection,
+  visible,
+  confirmLoading,
   onAddClick,
   onEditClick,
   onDeleteClick,
+  handleOk,
+  handleCancel,
 }: TableTemplateProps) => {
   return (
     <>
@@ -70,6 +78,12 @@ const TableTemplate: React.FC<TableTemplateProps> = ({
           type: 'radio',
           ...rowSelection,
         }}
+      />
+      <ModalTemplate
+        visible={visible}
+        confirmLoading={confirmLoading}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
       />
     </>
   );

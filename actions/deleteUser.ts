@@ -1,9 +1,12 @@
+import fetchUsers from './fetchUsers';
+
 import axiosService from '../utils/axiosService';
 
 import {
   DELETING_USER,
   DELETING_USER_SUCCESS,
   DELETING_USER_FAIL,
+  FETCHING_USERS,
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
@@ -16,6 +19,7 @@ import { data } from '../components/admin/queue/table';
 const deleteUser = (id: number) => {
   return async (dispatch: Dispatch) => {
     dispatch({ type: DELETING_USER });
+    dispatch({ type: FETCHING_USERS });
 
     return sleep(2000)
       .then(() => {
@@ -23,6 +27,8 @@ const deleteUser = (id: number) => {
           type: DELETING_USER_SUCCESS,
           payload: data.find((el) => el.id === id),
         });
+
+        dispatch(fetchUsers());
       })
       .catch((err) => {
         dispatch({

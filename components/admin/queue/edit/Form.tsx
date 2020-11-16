@@ -11,7 +11,7 @@ import { UserAddOutlined } from '@ant-design/icons';
 
 import QueueItem from '../../../../types/QueueItem';
 
-import { validateMessages } from '../../../form';
+import { validateMessages } from '../../../shared';
 
 type EditFormProps = {
   form: any;

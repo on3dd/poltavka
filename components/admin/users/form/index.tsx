@@ -19,8 +19,8 @@ import Administrator from '../../../../types/Administrator';
 import {
   validateMessages,
   phoneValidator,
-} from '../../../form/index';
-import PrefixSelector from '../../../form/prefix';
+} from '../../../shared/index';
+import PrefixSelector from '../../../shared/prefix';
 import { generatePassword } from './config';
 
 type FormTemplateProps = {

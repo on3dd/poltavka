@@ -1,9 +1,12 @@
+import fetchAdministrators from './fetchAdministrators';
+
 import axiosService from '../utils/axiosService';
 
 import {
   DELETING_ADMINISTRATOR,
   DELETING_ADMINISTRATOR_SUCCESS,
   DELETING_ADMINISTRATOR_FAIL,
+  FETCHING_ADMINISTRATORS,
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
@@ -16,6 +19,7 @@ import { data } from '../components/admin/queue/table';
 const deleteAdministrator = (id: number) => {
   return async (dispatch: Dispatch) => {
     dispatch({ type: DELETING_ADMINISTRATOR });
+    dispatch({ type: FETCHING_ADMINISTRATORS });
 
     return sleep(2000)
       .then(() => {
@@ -23,6 +27,8 @@ const deleteAdministrator = (id: number) => {
           type: DELETING_ADMINISTRATOR_SUCCESS,
           payload: data.find((el) => el.id === id),
         });
+
+        dispatch(fetchAdministrators());
       })
       .catch((err) => {
         dispatch({

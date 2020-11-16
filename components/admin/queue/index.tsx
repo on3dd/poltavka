@@ -5,15 +5,7 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import {
-  Row,
-  Col,
-  Space,
-  Button,
-  Table,
-  Modal,
-  Typography,
-} from 'antd';
+import { Row, Col, Space, Button, Table } from 'antd';
 import {
   UserAddOutlined,
   EditOutlined,
@@ -26,6 +18,7 @@ import RootState from '../../../types/states';
 import QueueItem from '../../../types/QueueItem';
 
 import { columns } from './table';
+import ModalTemplate from '../../shared/Modal';
 
 const Queue: React.FC = () => {
   const [id, setId] = useState(null);
@@ -130,22 +123,12 @@ const Queue: React.FC = () => {
           ...rowSelection,
         }}
       />
-      <Modal
-        title="Предупреждение"
-        okText="Подтвердить"
-        cancelText="Отмена"
+      <ModalTemplate
         visible={visible}
         confirmLoading={confirmLoading}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <Typography.Paragraph>
-          Вы уверенны, что хотите удалить данный элемент?
-        </Typography.Paragraph>
-        <Typography.Paragraph>
-          Последствия этого действия необратимы.
-        </Typography.Paragraph>
-      </Modal>
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
     </>
   );
 };
