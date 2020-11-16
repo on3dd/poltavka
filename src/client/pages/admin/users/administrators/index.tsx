@@ -3,7 +3,7 @@ import React from 'react';
 import wrapper from '../../../../store';
 import fetchAdministrators from '../../../../actions/fetchAdministrators';
 
-import AdminLayout from '../../../../layouts/admin/';
+import AdminLayout from '../../../../layouts/admin';
 import AdministratorsComponent from '../../../../components/admin/users/administrators';
 
 const Administrators: React.FC = () => {

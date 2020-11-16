@@ -1,15 +1,15 @@
 import React from 'react';
 
 import wrapper from '../../../../store';
-import fetchUsers from '../../../../actions/fetchUsers';
+import fetchDispatchers from '../../../../actions/fetchDispatchers';
 
-import AdminLayout from '../../../../layouts/admin/';
-import OrdinaryComponent from '../../../../components/admin/users/ordinary';
+import AdminLayout from '../../../../layouts/admin';
+import DispatchersComponent from '../../../../components/admin/users/dispatchers';
 
-const Ordinary: React.FC = () => {
+const Dispatchers: React.FC = () => {
   return (
     <AdminLayout>
-      <OrdinaryComponent />
+      <DispatchersComponent />
     </AdminLayout>
   );
 };
@@ -22,8 +22,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       );
     }
 
-    await store.dispatch(fetchUsers() as any);
+    await store.dispatch(fetchDispatchers() as any);
   },
 );
 
-export default Ordinary;
+export default Dispatchers;

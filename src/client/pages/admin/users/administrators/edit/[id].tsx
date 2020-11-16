@@ -1,10 +1,10 @@
 import React from 'react';
 
 import wrapper from '../../../../../store';
-import fetchUser from '../../../../../actions/fetchUser';
+import fetchAdministrator from '../../../../../actions/fetchAdministrator';
 
-import AdminLayout from '../../../../../layouts/admin/';
-import EditComponent from '../../../../../components/admin/users/ordinary/edit/[id]';
+import AdminLayout from '../../../../../layouts/admin';
+import EditComponent from '../../../../../components/admin/users/administrators/edit/[id]';
 
 const Edit: React.FC = () => {
   return (
@@ -26,7 +26,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       );
     }
 
-    await store.dispatch(fetchUser(Number(id)) as any); // see https://github.com/kirill-konshin/next-redux-wrapper/issues/207
+    await store.dispatch(
+      fetchAdministrator(Number(id)) as any,
+    ); // see https://github.com/kirill-konshin/next-redux-wrapper/issues/207
   },
 );
 

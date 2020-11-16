@@ -8,6 +8,7 @@ if (typeof require !== 'undefined') {
 }
 
 module.exports = withCSS({
+  distDir: '../../.next',
   cssModules: true,
   cssLoaderOptions: {
     importLoaders: 1,

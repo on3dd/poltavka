@@ -3,7 +3,7 @@ import React from 'react';
 import wrapper from '../../../../../store';
 import fetchDispatcher from '../../../../../actions/fetchDispatcher';
 
-import AdminLayout from '../../../../../layouts/admin/';
+import AdminLayout from '../../../../../layouts/admin';
 import EditComponent from '../../../../../components/admin/users/dispatchers/edit/[id]';
 
 const Edit: React.FC = () => {

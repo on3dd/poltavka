@@ -20,6 +20,6 @@
     "jsx": "preserve",
     "downlevelIteration": true // next.js issue; see https://github.com/vercel/next.js/issues/17094
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["src/next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

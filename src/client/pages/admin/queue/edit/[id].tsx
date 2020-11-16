@@ -3,7 +3,7 @@ import React from 'react';
 import wrapper from '../../../../store';
 import fetchQueueItem from '../../../../actions/fetchQueueItem';
 
-import AdminLayout from '../../../../layouts/admin/';
+import AdminLayout from '../../../../layouts/admin';
 import EditComponent from '../../../../components/admin/queue/edit/[id]';
 
 const Edit: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AdminLayout from '../../../../../layouts/admin/';
-import EditComponent from '../../../../../components/admin/users/ordinary/edit';
+import AdminLayout from '../../../../../layouts/admin';
+import EditComponent from '../../../../../components/admin/users/dispatchers/edit';
 
 const Edit: React.FC = () => {
   return (
