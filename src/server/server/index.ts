@@ -13,10 +13,12 @@ import NextServer, {
 } from 'next/dist/next-server/server/next-server';
 
 import express, { Express } from 'express';
+import session from 'express-session';
 import 'express-async-errors';
 
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import passport from 'passport';
-import session from 'express-session';
 
 import Ws from './ws';
 import router from '../routes';
@@ -65,6 +67,9 @@ export default class Server {
         path.join(__dirname, '../../../public'),
       ),
     );
+
+    this.app.use(cookieParser());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
 
     this.app.use(
       session({

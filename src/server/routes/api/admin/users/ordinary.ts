@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import AdminController from '../../../../controllers/admin';
+import OrdinaryController from '../../../../controllers/ordinary';
 
-import isAdmin from '../../../../middlewares/isAdmin';
+import isPrivileged from '../../../../middlewares/isPrivileged';
 
 const router = Router();
-const controller = new AdminController();
+const controller = new OrdinaryController();
 
 router.get('/', async (req, res) => {
   const data = await controller.all();
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
     });
 });
 
-router.post('/', isAdmin, async (req, res) => {
+router.post('/', isPrivileged, async (req, res) => {
   const data = await controller.create(req.body);
 
   res //

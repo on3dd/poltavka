@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import AdminController from '../../../../controllers/admin';
+import DispatcherController from '../../../../controllers/dispatcher';
 
 import isAdmin from '../../../../middlewares/isAdmin';
 
 const router = Router();
-const controller = new AdminController();
+const controller = new DispatcherController();
 
 router.get('/', async (req, res) => {
   const data = await controller.all();

@@ -4,11 +4,18 @@ import options from './options';
 
 import User from '../models/user';
 import IUser from '../types/user';
+import { ROLES } from '../utils/constants';
 
 const Admin = new Strategy(
   options,
   (phone, password, done) => {
     User.findOne({ phone }, (err, user: IUser) => {
+      console.log('phone', phone);
+      console.log('password', password);
+
+      console.log('err', err);
+      console.log('user', user);
+
       if (err) {
         return done(err);
       }
@@ -21,7 +28,7 @@ const Admin = new Strategy(
         return done(null, false);
       }
 
-      if (user.role !== 'admin') {
+      if (user.role !== ROLES.admin) {
         return done(null, false);
       }
 

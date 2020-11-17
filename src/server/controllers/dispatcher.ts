@@ -6,12 +6,12 @@ import {
   USER_FIND_EXCLUDE,
 } from '../utils/constants';
 
-interface AdminProps extends UserProps {}
+interface DispatcherProps extends UserProps {}
 
-class AdminController implements Controller {
+class DispatcherController implements Controller {
   public async all() {
     return User.find(
-      { role: ROLES.admin },
+      { role: ROLES.dispatcher },
       USER_FIND_EXCLUDE,
     );
   }
@@ -20,14 +20,14 @@ class AdminController implements Controller {
     return User.findOne({ id }, USER_FIND_EXCLUDE);
   }
 
-  public async create(props: AdminProps) {
-    const admin = new User({
+  public async create(props: DispatcherProps) {
+    const dispatcher = new User({
       ...props,
-      role: ROLES.admin,
+      role: ROLES.dispatcher,
     });
 
-    return await admin.save();
+    return await dispatcher.save();
   }
 }
 
-export default AdminController;
+export default DispatcherController;

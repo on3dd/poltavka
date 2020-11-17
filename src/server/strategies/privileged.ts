@@ -4,6 +4,7 @@ import options from './options';
 
 import User from '../models/user';
 import IUser from '../types/user';
+import { ROLES } from '../utils/constants';
 
 const Privileged = new Strategy(
   options,
@@ -21,7 +22,7 @@ const Privileged = new Strategy(
         return done(null, false);
       }
 
-      if (user.role !== 'dispatcher' || 'admin') {
+      if (user.role !== ROLES.dispatcher || ROLES.admin) {
         return done(null, false);
       }
 

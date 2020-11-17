@@ -1,5 +1,5 @@
 const serializeUser = (user, done) => {
-  done(null, user.id);
+  done(null, user._id);
 };
 
 export default serializeUser;
