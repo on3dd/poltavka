@@ -48,6 +48,7 @@ export default class Server {
 
     this.app.use('/', router);
 
+    // handle next app
     this.app.all('*', (req, res) => {
       return this.nextHandle(req, res);
     });

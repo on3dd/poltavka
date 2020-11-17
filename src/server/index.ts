@@ -16,8 +16,6 @@ import conf from '../next.config';
 const url = String(process.env.DB_URL || '');
 const port = Number(process.env.PORT || 3000);
 
-console.log('url', url);
-
 const dev = String(process.env.NODE_ENV) !== 'production';
 const dir = path.join(__dirname, '../client');
 
