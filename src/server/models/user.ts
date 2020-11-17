@@ -11,6 +11,7 @@ const schema = new Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   country: {
     type: String,
@@ -23,6 +24,7 @@ const schema = new Schema({
   phone: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,

@@ -7,23 +7,34 @@ const router = Router();
 const controller = new AdminController();
 
 router.get('/', async (req, res) => {
-  const admins = await controller.all();
+  const data = await controller.all();
 
   res //
     .status(StatusCodes.OK)
     .send({
-      data: admins,
+      data,
+      error: null,
+    });
+});
+
+router.get('/:id', async (req, res) => {
+  const data = await controller.find(req.params.id);
+
+  res //
+    .status(StatusCodes.OK)
+    .send({
+      data,
       error: null,
     });
 });
 
 router.post('/', async (req, res) => {
-  const admin = await controller.create(req.body);
+  const data = await controller.create(req.body);
 
   res //
     .status(StatusCodes.OK)
     .send({
-      data: admin,
+      data,
       error: null,
     });
 });

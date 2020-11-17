@@ -22,7 +22,11 @@ import Ws from './ws';
 import router from '../routes';
 import errorHandler from '../middlewares/errorHandler';
 
+import secret from '../utils/secret';
+
 import Local from '../strategies/local';
+import Privileged from '../strategies/privileged';
+import Admin from '../strategies/admin';
 
 import serializeUser from '../utils/serializeUser';
 import deserializeUser from '../utils/deserializeUser';
@@ -64,7 +68,7 @@ export default class Server {
 
     this.app.use(
       session({
-        secret: 'keyboard cat',
+        secret,
         resave: false,
         saveUninitialized: false,
       }),
@@ -81,6 +85,8 @@ export default class Server {
     });
 
     passport.use('local', Local);
+    passport.use('privileged', Privileged);
+    passport.use('admin', Admin);
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);

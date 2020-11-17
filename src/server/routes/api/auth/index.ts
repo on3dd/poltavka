@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import passport from 'passport';
 import { StatusCodes } from 'http-status-codes';
 
 import AdminController from '../../../controllers/auth';
+
+import isUserExist from '../../../middlewares/isUserExist';
 
 const router = Router();
 const controller = new AdminController();
@@ -18,23 +19,15 @@ const controller = new AdminController();
 //     });
 // });
 
-router.post(
-  '/',
-  passport.authenticate('local', {
-    failWithError: true,
-    failureMessage: true,
-  }),
-  async (req, res) => {
-    const auth = await controller.authenticate(req.body);
-    console.log('req.body', req.body);
+router.post('/', isUserExist, async (req, res) => {
+  const auth = await controller.authenticate(req.body);
 
-    res //
-      .status(StatusCodes.OK)
-      .send({
-        data: auth,
-        error: null,
-      });
-  },
-);
+  res //
+    .status(StatusCodes.OK)
+    .send({
+      data: auth,
+      error: null,
+    });
+});
 
 export default router;

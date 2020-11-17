@@ -5,7 +5,7 @@ import options from './options';
 import User from '../models/user';
 import IUser from '../types/user';
 
-const Local = new Strategy(
+const Admin = new Strategy(
   options,
   (phone, password, done) => {
     User.findOne({ phone }, (err, user: IUser) => {
@@ -21,9 +21,13 @@ const Local = new Strategy(
         return done(null, false);
       }
 
+      if (user.role !== 'admin') {
+        return done(null, false);
+      }
+
       return done(null, user);
     });
   },
 );
 
-export default Local;
+export default Admin;
