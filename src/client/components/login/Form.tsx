@@ -3,8 +3,8 @@ import { Form, Input, Button, Checkbox } from 'antd';
 
 import Auth from '../../types/Auth';
 
-import { validateMessages, phoneValidator } from './index';
-import PrefixSelector from './prefix';
+import { validateMessages, phoneValidator } from '../shared/index';
+import PrefixSelector from '../shared/prefix';
 
 type LoginFormProps = {
   initialValues: Auth;
