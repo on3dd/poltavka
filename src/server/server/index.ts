@@ -1,3 +1,5 @@
+import path from 'path';
+
 import {
   Server as HttpServer,
   IncomingMessage,
@@ -10,12 +12,20 @@ import NextServer, {
   ServerConstructor as NextServerConstructor,
 } from 'next/dist/next-server/server/next-server';
 
-import express, { Express, urlencoded } from 'express';
+import express, { Express } from 'express';
 import 'express-async-errors';
+
+import passport from 'passport';
+import session from 'express-session';
 
 import Ws from './ws';
 import router from '../routes';
 import errorHandler from '../middlewares/errorHandler';
+
+import Local from '../strategies/local';
+
+import serializeUser from '../utils/serializeUser';
+import deserializeUser from '../utils/deserializeUser';
 
 type HandleFunc = (
   req: IncomingMessage,
@@ -41,10 +51,27 @@ export default class Server {
     this.app = express();
 
     this.app.use(
-      urlencoded({
+      express.urlencoded({
         extended: true,
       }),
     );
+
+    this.app.use(
+      express.static(
+        path.join(__dirname, '../../../public'),
+      ),
+    );
+
+    this.app.use(
+      session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false,
+      }),
+    );
+
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
 
     this.app.use('/', router);
 
@@ -52,6 +79,11 @@ export default class Server {
     this.app.all('*', (req, res) => {
       return this.nextHandle(req, res);
     });
+
+    passport.use('local', Local);
+
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
 
     // Must be placed after the router
     this.app.use(errorHandler);
