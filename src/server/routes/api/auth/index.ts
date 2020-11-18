@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import AdminController from '../../../controllers/auth';
 
-import isUserExist from '../../../middlewares/isUserExist';
+import { SECRET } from '../../../utils/constants';
 
 const router = Router();
 const controller = new AdminController();
@@ -17,17 +17,6 @@ const controller = new AdminController();
 //     .status(StatusCodes.OK)
 //     .send({
 //       data: admins,
-//       error: null,
-//     });
-// });
-
-// router.post('/', isUserExist, async (req, res) => {
-//   const auth = await controller.authenticate(req.body);
-
-//   res //
-//     .status(StatusCodes.OK)
-//     .send({
-//       data: auth,
 //       error: null,
 //     });
 // });
@@ -45,18 +34,22 @@ router.post('/', async (req, res, next) => {
         return next(error);
       }
 
-      req.login(user, { session: false }, async (err) => {
-        if (err) return next(err);
+      return req.login(
+        user,
+        { session: false },
+        async (err) => {
+          if (err) return next(err);
 
-        const body = {
-          _id: user._id,
-          email: user.email,
-        };
+          const body = {
+            _id: user._id,
+            email: user.email,
+          };
 
-        const token = sign({ user: body }, 'TOP_SECRET');
+          const token = sign({ user: body }, SECRET);
 
-        return res.json({ token });
-      });
+          return res.json({ token });
+        },
+      );
     } catch (err) {
       return next(err);
     }

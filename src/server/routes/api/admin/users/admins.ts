@@ -3,7 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 
 import AdminController from '../../../../controllers/admin';
 
-import isAdmin from '../../../../middlewares/isAdmin';
+import jwt from '../../../../middlewares/jwt';
+import isAdmin from '../../../../utils/isAdmin';
 
 const router = Router();
 const controller = new AdminController();
@@ -11,7 +12,7 @@ const controller = new AdminController();
 router.get('/', async (req, res) => {
   const data = await controller.all();
 
-  res //
+  return res //
     .status(StatusCodes.OK)
     .send({
       data,
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const data = await controller.find(req.params.id);
 
-  res //
+  return res //
     .status(StatusCodes.OK)
     .send({
       data,
@@ -30,11 +31,21 @@ router.get('/:id', async (req, res) => {
     });
 });
 
-// router.post('/', isAdmin, async (req, res) => {
-router.post('/', async (req, res) => {
+router.post('/', jwt, async (req, res) => {
+  console.log('req.user', req.user);
+
+  const user = req.user as { _id: string };
+
+  if ((await isAdmin(user._id)) === false) {
+    return res.status(StatusCodes.FORBIDDEN).send({
+      data: null,
+      error: 'Forbidden',
+    });
+  }
+
   const data = await controller.create(req.body);
 
-  res //
+  return res //
     .status(StatusCodes.OK)
     .send({
       data,

@@ -3,7 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 
 import OrdinaryController from '../../../../controllers/ordinary';
 
-import isPrivileged from '../../../../middlewares/isPrivileged';
+import jwt from '../../../../middlewares/jwt';
+import isPrivileged from '../../../../utils/isPrivileged';
 
 const router = Router();
 const controller = new OrdinaryController();
@@ -11,7 +12,7 @@ const controller = new OrdinaryController();
 router.get('/', async (req, res) => {
   const data = await controller.all();
 
-  res //
+  return res //
     .status(StatusCodes.OK)
     .send({
       data,
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const data = await controller.find(req.params.id);
 
-  res //
+  return res //
     .status(StatusCodes.OK)
     .send({
       data,
@@ -30,10 +31,19 @@ router.get('/:id', async (req, res) => {
     });
 });
 
-router.post('/', isPrivileged, async (req, res) => {
+router.post('/', jwt, async (req, res) => {
+  const user = req.user as { _id: string };
+
+  if ((await isPrivileged(user._id)) === false) {
+    return res.status(StatusCodes.FORBIDDEN).send({
+      data: null,
+      error: 'Forbidden',
+    });
+  }
+
   const data = await controller.create(req.body);
 
-  res //
+  return res //
     .status(StatusCodes.OK)
     .send({
       data,

@@ -1,16 +1,12 @@
 import { Strategy, ExtractJwt } from 'passport-jwt';
 
-import options from './options';
-
-import User from '../models/user';
-import IUser from '../types/user';
-import { ROLES } from '../utils/constants';
+import { SECRET } from '../utils/constants';
 
 const JWT = new Strategy(
   {
-    secretOrKey: 'TOP_SECRET',
+    secretOrKey: SECRET,
     jwtFromRequest: ExtractJwt.fromUrlQueryParameter(
-      'secret_token',
+      'token',
     ),
   },
   async (token, done) => {

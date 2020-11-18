@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-import Role from './role';
+import { Role } from './roles';
 export default interface User extends Document {
   id?: number;
   name: string;

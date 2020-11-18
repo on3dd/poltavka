@@ -1,12 +1,8 @@
-import { Model, Document } from 'mongoose';
-
 import { Strategy } from 'passport-local';
 
 import options from './options';
 
 import User from '../models/user';
-import IUser from '../types/user';
-import { ROLES } from '../utils/constants';
 
 const Login = new Strategy(
   options,

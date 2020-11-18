@@ -1,6 +1,6 @@
 import { authenticate } from 'passport';
 
-export default authenticate('admin', {
+export default authenticate('jwt', {
   session: false,
   failWithError: true,
 });

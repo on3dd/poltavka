@@ -1,4 +1,4 @@
-import { Schema, model, HookNextFunction } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { hash, compare } from 'bcrypt';
 
 import IUser from '../types/user';
