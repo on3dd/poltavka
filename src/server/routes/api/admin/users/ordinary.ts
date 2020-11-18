@@ -51,7 +51,7 @@ router.post('/', jwt, async (req, res) => {
     });
 });
 
-router.patch('/', jwt, async (req, res) => {
+router.patch('/:id', jwt, async (req, res) => {
   const user = req.user as { _id: string };
 
   if ((await isPrivileged(user._id)) === false) {
