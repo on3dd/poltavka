@@ -36,6 +36,15 @@ class OrdinaryController implements Controller {
       fields: USER_FIND_EXCLUDE,
     });
   }
+
+  public async delete(id: string) {
+    return await User.findOneAndDelete(
+      { id },
+      {
+        projection: USER_FIND_EXCLUDE,
+      },
+    );
+  }
 }
 
 export default OrdinaryController;

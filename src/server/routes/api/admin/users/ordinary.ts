@@ -74,4 +74,24 @@ router.patch('/:id', jwt, async (req, res) => {
     });
 });
 
+router.delete('/:id', jwt, async (req, res) => {
+  const user = req.user as { _id: string };
+
+  if ((await isPrivileged(user._id)) === false) {
+    return res.status(StatusCodes.FORBIDDEN).send({
+      data: null,
+      error: 'Forbidden',
+    });
+  }
+
+  const data = await controller.delete(req.params.id);
+
+  return res //
+    .status(StatusCodes.OK)
+    .send({
+      data,
+      error: null,
+    });
+});
+
 export default router;
