@@ -7,6 +7,7 @@ import {
 } from '../utils/constants';
 
 interface AdminProps extends UserProps {}
+interface AdminDraft extends Partial<UserProps> {}
 
 class AdminController implements Controller {
   public async all() {
@@ -17,7 +18,7 @@ class AdminController implements Controller {
   }
 
   public async find(id: string) {
-    return User.findOne({ id }, USER_FIND_EXCLUDE);
+    return await User.findOne({ id }, USER_FIND_EXCLUDE);
   }
 
   public async create(props: AdminProps) {
@@ -27,6 +28,13 @@ class AdminController implements Controller {
     });
 
     return await admin.save();
+  }
+
+  public async update(id: string, props: AdminDraft) {
+    return await User.findOneAndUpdate({ id }, props, {
+      new: true,
+      fields: USER_FIND_EXCLUDE,
+    });
   }
 }
 

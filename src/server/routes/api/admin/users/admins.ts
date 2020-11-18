@@ -32,8 +32,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', jwt, async (req, res) => {
-  console.log('req.user', req.user);
-
   const user = req.user as { _id: string };
 
   if ((await isAdmin(user._id)) === false) {
@@ -44,6 +42,29 @@ router.post('/', jwt, async (req, res) => {
   }
 
   const data = await controller.create(req.body);
+
+  return res //
+    .status(StatusCodes.OK)
+    .send({
+      data,
+      error: null,
+    });
+});
+
+router.patch('/:id', jwt, async (req, res) => {
+  const user = req.user as { _id: string };
+
+  if ((await isAdmin(user._id)) === false) {
+    return res.status(StatusCodes.FORBIDDEN).send({
+      data: null,
+      error: 'Forbidden',
+    });
+  }
+
+  const data = await controller.update(
+    req.params.id,
+    req.body,
+  );
 
   return res //
     .status(StatusCodes.OK)

@@ -51,4 +51,27 @@ router.post('/', jwt, async (req, res) => {
     });
 });
 
+router.patch('/:id', jwt, async (req, res) => {
+  const user = req.user as { _id: string };
+
+  if ((await isAdmin(user._id)) === false) {
+    return res.status(StatusCodes.FORBIDDEN).send({
+      data: null,
+      error: 'Forbidden',
+    });
+  }
+
+  const data = await controller.update(
+    req.params.id,
+    req.body,
+  );
+
+  return res //
+    .status(StatusCodes.OK)
+    .send({
+      data,
+      error: null,
+    });
+});
+
 export default router;

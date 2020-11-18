@@ -7,6 +7,7 @@ import {
 } from '../utils/constants';
 
 interface DispatcherProps extends UserProps {}
+interface DispatcherDraft extends Partial<UserProps> {}
 
 class DispatcherController implements Controller {
   public async all() {
@@ -27,6 +28,13 @@ class DispatcherController implements Controller {
     });
 
     return await dispatcher.save();
+  }
+
+  public async update(id: string, props: DispatcherDraft) {
+    return await User.findOneAndUpdate({ id }, props, {
+      new: true,
+      fields: USER_FIND_EXCLUDE,
+    });
   }
 }
 

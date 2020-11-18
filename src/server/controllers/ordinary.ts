@@ -7,6 +7,7 @@ import {
 } from '../utils/constants';
 
 interface OrdinaryProps extends UserProps {}
+interface OrdinaryDraft extends Partial<UserProps> {}
 
 class OrdinaryController implements Controller {
   public async all() {
@@ -27,6 +28,13 @@ class OrdinaryController implements Controller {
     });
 
     return await ordinary.save();
+  }
+
+  public async update(id: string, props: OrdinaryDraft) {
+    return await User.findOneAndUpdate({ id }, props, {
+      new: true,
+      fields: USER_FIND_EXCLUDE,
+    });
   }
 }
 
