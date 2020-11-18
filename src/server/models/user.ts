@@ -1,4 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, HookNextFunction } from 'mongoose';
+import { hash, compare } from 'bcrypt';
+
+import IUser from '../types/user';
 
 import autoincrement from '../utils/autoincrement';
 
@@ -45,6 +48,18 @@ const schema = new Schema({
   // },
 });
 
-schema.pre('save', autoincrement);
+schema.pre<IUser>('save', autoincrement);
 
-export default model('User', schema);
+schema.pre<IUser>('save', async function (next) {
+  this.password = await hash(this.password, 10);
+
+  next();
+});
+
+schema.methods.isValidPassword = async function (
+  password: string,
+) {
+  return await compare(password, this.password);
+};
+
+export default model<IUser>('User', schema);

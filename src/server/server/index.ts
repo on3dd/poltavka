@@ -26,6 +26,9 @@ import errorHandler from '../middlewares/errorHandler';
 
 import secret from '../utils/secret';
 
+import Login from '../strategies/login';
+import Jwt from '../strategies/jwt';
+
 import Local from '../strategies/local';
 import Privileged from '../strategies/privileged';
 import Admin from '../strategies/admin';
@@ -88,6 +91,9 @@ export default class Server {
     this.app.all('*', (req, res) => {
       return this.nextHandle(req, res);
     });
+
+    passport.use('login', Login);
+    passport.use('jwt', Jwt);
 
     passport.use('local', Local);
     passport.use('privileged', Privileged);

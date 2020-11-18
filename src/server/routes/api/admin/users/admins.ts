@@ -30,7 +30,8 @@ router.get('/:id', async (req, res) => {
     });
 });
 
-router.post('/', isAdmin, async (req, res) => {
+// router.post('/', isAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
   const data = await controller.create(req.body);
 
   res //
