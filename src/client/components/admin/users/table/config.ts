@@ -26,6 +26,10 @@ export const columns = [
     render: reduceName,
   },
   {
+    title: 'Префикс',
+    dataIndex: 'prefix',
+  },
+  {
     title: 'Номер телефона',
     dataIndex: 'phone',
   },
