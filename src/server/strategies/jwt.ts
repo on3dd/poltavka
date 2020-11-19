@@ -5,16 +5,14 @@ import { SECRET } from '../utils/constants';
 const JWT = new Strategy(
   {
     secretOrKey: SECRET,
-    jwtFromRequest: ExtractJwt.fromUrlQueryParameter(
-      'token',
-    ),
+    jwtFromRequest: (req) => req.cookies.token,
   },
   async (token, done) => {
-    try {
-      return done(null, token.user);
-    } catch (err) {
-      done(err);
-    }
+    // if (Date.now() > token.expires) {
+    //   return done('jwt expired');
+    // }
+
+    return done(null, token);
   },
 );
 

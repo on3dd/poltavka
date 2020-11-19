@@ -3,57 +3,63 @@ import { authenticate } from 'passport';
 import { sign } from 'jsonwebtoken';
 import { StatusCodes } from 'http-status-codes';
 
-import AdminController from '../../../controllers/auth';
-
 import { SECRET } from '../../../utils/constants';
 
 const router = Router();
-const controller = new AdminController();
 
-// router.get('/', async (req, res) => {
-//   const admins = await controller.all();
-
-//   res //
-//     .status(StatusCodes.OK)
-//     .send({
-//       data: admins,
-//       error: null,
-//     });
-// });
-
-router.post('/', async (req, res, next) => {
-  authenticate('login', async (err, user, info) => {
-    try {
-      if (err || !user) {
-        console.log('err', err);
+router.post('/', (req, res) => {
+  authenticate(
+    'login',
+    { session: false },
+    (error, user) => {
+      if (error || !user) {
+        console.log('error', error);
         console.log('user', user);
-        console.log('info', info);
 
-        const error = new Error('An error occurred.');
-
-        return next(error);
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .send({ data: null, error });
       }
 
-      return req.login(
-        user,
-        { session: false },
-        async (err) => {
-          if (err) return next(err);
+      /** This is what ends up in our JWT */
+      const payload = {
+        _id: user._id,
+        name: user.name,
+        expires:
+          Date.now() +
+          Number(process.env.JWT_EXPIRATION_MS),
+      };
 
-          const body = {
-            _id: user._id,
-            email: user.email,
-          };
+      /** assigns payload to req.user */
+      req.login(payload, { session: false }, (error) => {
+        if (error) {
+          console.error(error);
 
-          const token = sign({ user: body }, SECRET);
+          return res
+            .status(StatusCodes.BAD_REQUEST)
+            .send({ data: null, error });
+        }
 
-          return res.json({ token });
-        },
-      );
-    } catch (err) {
-      return next(err);
-    }
-  })(req, res, next);
+        /** generate a signed json web token and return it in the response */
+        const token = sign(JSON.stringify(payload), SECRET);
+
+        console.log('token', token);
+
+        /** assign our jwt to the cookie */
+        res.cookie('token', token, {
+          domain: 'localhost',
+          path: '/',
+          httpOnly: true,
+          // secure: true,
+          secure: false,
+        });
+
+        return res
+          .status(StatusCodes.OK)
+          .send({ data: user });
+      });
+    },
+  )(req, res);
 });
 
 export default router;
