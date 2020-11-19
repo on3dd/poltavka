@@ -8,9 +8,9 @@ const JWT = new Strategy(
     jwtFromRequest: (req) => req.cookies.token,
   },
   async (token, done) => {
-    // if (Date.now() > token.expires) {
-    //   return done('jwt expired');
-    // }
+    if (Date.now() > token.expires) {
+      return done('jwt expired');
+    }
 
     return done(null, token);
   },
