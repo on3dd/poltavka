@@ -1,19 +1,14 @@
 import { Router } from 'express';
-import { verify } from 'jsonwebtoken';
 import { StatusCodes } from 'http-status-codes';
 
 import jwt from '../../../middlewares/jwt';
-import { SECRET } from '../../../utils/constants';
+import decode from '../../../utils/decode';
 import isPrivileged from '../../../utils/isPrivileged';
 
 const router = Router();
 
 router.get('/', jwt, async (req, res) => {
-  const decoded = verify(req.cookies.token, SECRET) as {
-    _id: string;
-    phone: string;
-    expires: string;
-  };
+  const decoded = decode(req.cookies.token);
 
   const privileged = await isPrivileged(decoded._id);
 

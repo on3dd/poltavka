@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import OrdinaryController from '../../../../controllers/ordinary';
 
 import jwt from '../../../../middlewares/jwt';
+import decode from '../../../../utils/decode';
 import isPrivileged from '../../../../utils/isPrivileged';
 
 const router = Router();
@@ -32,9 +33,9 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', jwt, async (req, res) => {
-  const user = req.user as { _id: string };
+  const decoded = decode(req.cookies.token);
 
-  if ((await isPrivileged(user._id)) === false) {
+  if ((await isPrivileged(decoded._id)) === false) {
     return res.status(StatusCodes.FORBIDDEN).send({
       data: null,
       error: 'Forbidden',
@@ -52,9 +53,9 @@ router.post('/', jwt, async (req, res) => {
 });
 
 router.patch('/:id', jwt, async (req, res) => {
-  const user = req.user as { _id: string };
+  const decoded = decode(req.cookies.token);
 
-  if ((await isPrivileged(user._id)) === false) {
+  if ((await isPrivileged(decoded._id)) === false) {
     return res.status(StatusCodes.FORBIDDEN).send({
       data: null,
       error: 'Forbidden',
@@ -75,9 +76,9 @@ router.patch('/:id', jwt, async (req, res) => {
 });
 
 router.delete('/:id', jwt, async (req, res) => {
-  const user = req.user as { _id: string };
+  const decoded = decode(req.cookies.token);
 
-  if ((await isPrivileged(user._id)) === false) {
+  if ((await isPrivileged(decoded._id)) === false) {
     return res.status(StatusCodes.FORBIDDEN).send({
       data: null,
       error: 'Forbidden',
