@@ -38,7 +38,7 @@ const Login: React.FC = () => {
     await dispatch(auth(values));
 
     console.log('redirecting to the main page...');
-    // await router.push('/');
+    await router.push('/admin');
   };
 
   const onFinishFailed = (errorInfo: any) => {

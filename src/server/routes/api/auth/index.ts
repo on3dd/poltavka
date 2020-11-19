@@ -47,8 +47,8 @@ router.post('/', (req, res) => {
 
         /** assign our jwt to the cookie */
         res.cookie('token', token, {
-          domain: 'localhost',
-          path: '/',
+          // domain: 'localhost',
+          // path: '/',
           httpOnly: true,
           // secure: true,
           secure: false,

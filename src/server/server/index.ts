@@ -16,6 +16,8 @@ import express, { Express } from 'express';
 import session from 'express-session';
 import 'express-async-errors';
 
+import cors from 'cors';
+
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
@@ -53,6 +55,8 @@ export default class Server {
     this.nextHandle = this.next.getRequestHandler();
 
     this.app = express();
+
+    this.app.use(cors());
 
     this.app.use(
       express.urlencoded({
