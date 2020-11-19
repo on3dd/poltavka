@@ -47,7 +47,6 @@ const authReducer = (
 
     case AUTHENTICATION_SUCCESS:
       return Object.assign({}, state, {
-        data: action.payload,
         isFetching: false,
         hasError: false,
         errorMessage: null,

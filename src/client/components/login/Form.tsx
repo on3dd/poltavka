@@ -3,7 +3,10 @@ import { Form, Input, Button, Checkbox } from 'antd';
 
 import Auth from '../../types/Auth';
 
-import { validateMessages, phoneValidator } from '../shared/index';
+import {
+  validateMessages,
+  phoneValidator,
+} from '../shared/index';
 import PrefixSelector from '../shared/prefix';
 
 type LoginFormProps = {
@@ -48,7 +51,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         ]}
       >
         <Input
-          addonBefore={PrefixSelector}
+          addonBefore={<PrefixSelector />}
           style={{ width: '100%' }}
         />
       </Form.Item>

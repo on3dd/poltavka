@@ -33,8 +33,12 @@ const Login: React.FC = () => {
   const onFinish = async (values: Auth) => {
     console.log('Success:', values);
 
+    console.log('loggin in...');
+
     await dispatch(auth(values));
-    await router.push('/admin');
+
+    console.log('redirecting to the main page...');
+    // await router.push('/');
   };
 
   const onFinishFailed = (errorInfo: any) => {

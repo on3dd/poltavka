@@ -12,9 +12,9 @@ export const PATH_NAMES = {
   '[id]': 'ID',
 };
 
-export const API_BASE_URL =
-  'https://jsonplaceholder.typicode.com';
+export const API_BASE_URL = 'http://localhost:3000/api/';
 
 export const API_ENDPOINTS = {
-  posts: '/posts',
+  auth: 'auth',
+  security: 'security',
 };

@@ -11,17 +11,22 @@ import {
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
-import { sleep } from '../utils/functions';
+import Storage from '../utils/storage';
+
+const storage = Storage.getInstance();
 
 const auth = (data: Auth) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: AUTHENTICATION });
 
-    return sleep(2000)
-      .then(() => {
+    return axiosService
+      .post(API_ENDPOINTS.auth, data)
+      .then((res) => {
+        storage.set('token', res.data);
+
         dispatch({
           type: AUTHENTICATION_SUCCESS,
-          payload: data,
+          payload: res.data,
         });
       })
       .catch((err) => {
@@ -30,21 +35,6 @@ const auth = (data: Auth) => {
           payload: err,
         });
       });
-
-    // return axiosService
-    //   .get(API_ENDPOINTS.login)
-    //   .then((res) => {
-    //     dispatch({
-    //       type: AUTH_SUCCESS,
-    //       payload: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: AUTH_FAIL,
-    //       payload: err,
-    //     });
-    //   });
   };
 };
 

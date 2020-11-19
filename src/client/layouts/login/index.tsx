@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Layout, Row, Col } from 'antd';
 
 import LayoutProps from '../../types/props/layout';
@@ -19,29 +20,34 @@ const Login: React.FC<LayoutProps> = ({
   children,
 }: LayoutProps) => {
   return (
-    <Layout
-      className="login"
-      style={{ minHeight: '100vh' }}
-    >
-      <Layout.Content
-        className="login__layout"
-        style={{
-          height: '100%',
-          padding: '80px 50px 50px 50px',
-        }}
+    <>
+      <Head>
+        <title>Вход | Полтавка</title>
+      </Head>
+      <Layout
+        className="login"
+        style={{ minHeight: '100vh' }}
       >
-        <div
-          className="login__content"
+        <Layout.Content
+          className="login__layout"
           style={{
-            height: 'inherit',
+            height: '100%',
+            padding: '80px 50px 50px 50px',
           }}
         >
-          <Row justify="center">
-            <Col {...layout}>{children}</Col>
-          </Row>
-        </div>
-      </Layout.Content>
-    </Layout>
+          <div
+            className="login__content"
+            style={{
+              height: 'inherit',
+            }}
+          >
+            <Row justify="center">
+              <Col {...layout}>{children}</Col>
+            </Row>
+          </div>
+        </Layout.Content>
+      </Layout>
+    </>
   );
 };
 
