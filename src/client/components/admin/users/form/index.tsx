@@ -25,6 +25,7 @@ import { generatePassword } from './config';
 
 type FormTemplateProps = {
   form: any;
+  loading: boolean;
   initialValues: User | Dispatcher | Administrator;
   onValuesChange: (value: any) => void;
   onFinish: (value: any) => void;
@@ -33,6 +34,7 @@ type FormTemplateProps = {
 
 const FormTemplate: React.FC<FormTemplateProps> = ({
   form,
+  loading,
   initialValues,
   onValuesChange,
   onFinish,
@@ -147,6 +149,7 @@ const FormTemplate: React.FC<FormTemplateProps> = ({
         <Button
           type="primary"
           htmlType="submit"
+          loading={loading}
           icon={<UserAddOutlined />}
         >
           {initialValues.id ? 'Изменить' : 'Добавить'}{' '}

@@ -1,6 +1,7 @@
 import React, {
   useState,
   useEffect,
+  useMemo,
   useCallback,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,6 +42,10 @@ const EditById = () => {
     form.setFieldsValue(dispatcher.data);
   }, [dispatcher.data]);
 
+  const loading = useMemo(() => {
+    return dispatcher.isFetching;
+  }, [dispatcher.isFetching]);
+
   const onValuesChange = (values: any) => {
     console.log('onvaluechange', values);
 
@@ -62,8 +67,8 @@ const EditById = () => {
   const onFinish = async (values: DispatcherType) => {
     console.log('Success:', values);
 
-    await dispatch(submitFunction(values));
-    await router.push('/admin/users/dispatchers');
+    await dispatch(submitFunction(initialValues));
+    // await router.push('/admin/users/dispatchers');
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -72,6 +77,7 @@ const EditById = () => {
   return (
     <FormTemplate
       form={form}
+      loading={loading}
       initialValues={initialValues}
       onValuesChange={onValuesChange}
       onFinish={onFinish}

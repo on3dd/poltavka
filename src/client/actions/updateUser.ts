@@ -11,17 +11,19 @@ import {
 import Ordinary from '../types/Ordinary';
 
 import { API_ENDPOINTS } from '../utils/constants';
-import { sleep } from '../utils/functions';
 
 const updateUser = (item: Ordinary) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: UPDATING_USER });
 
-    return sleep(2000)
-      .then(() => {
+    const { id } = item;
+
+    return axiosService
+      .patch(API_ENDPOINTS.admin.users.ord.id(id), item)
+      .then((res) => {
         dispatch({
           type: UPDATING_USER_SUCCESS,
-          payload: item,
+          payload: res.data.data,
         });
       })
       .catch((err) => {
@@ -30,21 +32,6 @@ const updateUser = (item: Ordinary) => {
           payload: err,
         });
       });
-
-    // return axiosService
-    //   .get(API_ENDPOINTS.queue)
-    //   .then((res) => {
-    //     dispatch({
-    //       type: UPDATING_QUEUE_SUCCESS,
-    //       payload: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: UPDATING_QUEUE_FAIL,
-    //       payload: err,
-    //     });
-    //   });
   };
 };
 
