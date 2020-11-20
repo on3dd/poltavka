@@ -74,6 +74,7 @@ const TableTemplate: React.FC<TableTemplateProps> = ({
         size="large"
         columns={columns}
         dataSource={dataSource}
+        rowKey="name"
         rowSelection={{
           type: 'radio',
           ...rowSelection,

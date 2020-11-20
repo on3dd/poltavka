@@ -1,4 +1,8 @@
-import { reduceName } from '../../../table';
+import {
+  renderIndex,
+  reduceName,
+  transformDate,
+} from '../../../table';
 
 export const data = new Array(100)
   .fill(0)
@@ -18,7 +22,8 @@ export const data = new Array(100)
 export const columns = [
   {
     title: '№',
-    dataIndex: 'number',
+    dataIndex: 'index',
+    render: renderIndex,
   },
   {
     title: 'ФИО',
@@ -35,11 +40,12 @@ export const columns = [
   },
   {
     title: 'Дата регистрации',
-    dataIndex: 'registration_date',
+    dataIndex: 'date',
+    render: transformDate,
   },
-  {
-    title: 'Добавлен',
-    dataIndex: 'added_by',
-    render: reduceName,
-  },
+  // {
+  //   title: 'Добавлен',
+  //   dataIndex: 'added_by',
+  //   render: reduceName,
+  // },
 ];

@@ -9,18 +9,17 @@ import {
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
-import { sleep } from '../utils/functions';
-import { data } from '../components/admin/users/table/config';
 
 const fetchUsers = () => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: FETCHING_USERS });
 
-    return sleep(2000)
-      .then(() => {
+    return axiosService
+      .get(API_ENDPOINTS.admin.users.ordinary)
+      .then((res) => {
         dispatch({
           type: FETCHING_USERS_SUCCESS,
-          payload: data,
+          payload: res.data.data,
         });
       })
       .catch((err) => {
@@ -29,21 +28,6 @@ const fetchUsers = () => {
           payload: err,
         });
       });
-
-    // return axiosService
-    //   .get(API_ENDPOINTS.queue)
-    //   .then((res) => {
-    //     dispatch({
-    //       type: FETCHING_USERS_SUCCESS,
-    //       payload: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: FETCHING_USERS_FAIL,
-    //       payload: err,
-    //     });
-    //   });
   };
 };
 

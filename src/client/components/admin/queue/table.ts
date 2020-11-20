@@ -9,12 +9,12 @@ export const data: QueueItem[] = new Array(100)
     number: idx + 1,
     registration_date: '13.11.2020, 17:23:21',
     country: 'Россия',
-    car_number: 'a228уе322',
-    product: 'Снюс',
-    driver: 'Ишутин Артем Ягуарович',
-    car_owner: 'OOO "Jaguar.Pro"',
+    car_number: 'а123бв125',
+    product: 'Пшено',
+    driver: 'Иванов Иван Иванович',
+    car_owner: 'OOO "Иванов и КО"',
     car_location: 'Российская Федерация',
-    car_status: 'Убил негра',
+    car_status: 'В пути',
   }));
 
 export const columns = [

@@ -16,7 +16,7 @@ const fetchQueue = () => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: FETCHING_QUEUE });
 
-    return sleep(2000)
+    return sleep(100)
       .then(() => {
         dispatch({
           type: FETCHING_QUEUE_SUCCESS,
