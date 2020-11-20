@@ -20,7 +20,7 @@ import {
   validateMessages,
   phoneValidator,
 } from '../../../shared/index';
-import PrefixSelector from '../../../shared/prefix';
+import PrefixSelector from '../../../shared/Prefix';
 import { generatePassword } from './config';
 
 type FormTemplateProps = {
@@ -38,6 +38,12 @@ const FormTemplate: React.FC<FormTemplateProps> = ({
   onFinish,
   onFinishFailed,
 }: FormTemplateProps) => {
+  const onGeneratePasswordClick = () => {
+    form.setFieldsValue({
+      password: generatePassword(),
+    });
+  };
+
   return (
     <Form
       name="new"
@@ -106,27 +112,29 @@ const FormTemplate: React.FC<FormTemplateProps> = ({
       </Form.Item>
 
       {!initialValues.id && (
-        <Form.Item
-          name="password"
-          label="Пароль"
-          rules={[
-            {
-              type: 'string',
-              required: true,
-              whitespace: true,
-              len: 6,
-            },
-          ]}
-        >
+        <Form.Item label="Пароль">
           <Row justify="space-between">
             <Col flex="auto">
-              <Input.Password />
+              <Form.Item
+                name="password"
+                noStyle={true}
+                rules={[
+                  {
+                    type: 'string',
+                    required: true,
+                    whitespace: true,
+                    len: 6,
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
             </Col>
             <Col flex="none" style={{ marginLeft: '1rem' }}>
               <Button
                 type="default"
                 icon={<FileProtectOutlined />}
-                onClick={generatePassword}
+                onClick={onGeneratePasswordClick}
               >
                 Сгенерировать
               </Button>

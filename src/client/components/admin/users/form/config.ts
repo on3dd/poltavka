@@ -1,7 +1,7 @@
 import { generate } from 'generate-password';
 
 export const generatePassword = () => {
-  const password = generate({
+  return generate({
     length: 6,
     numbers: true,
     symbols: true,
@@ -10,6 +10,4 @@ export const generatePassword = () => {
     strict: true,
     excludeSimilarCharacters: true,
   });
-
-  console.log('password', password);
 };
