@@ -53,7 +53,7 @@ const Ordinary: React.FC = () => {
     await dispatch(deleteUser(id));
 
     closeModal();
-  }, []);
+  }, [id]);
 
   const handleCancel = useCallback(() => {
     closeModal();
@@ -66,7 +66,7 @@ const Ordinary: React.FC = () => {
       selectedRows: OrdinaryType[],
     ) => {
       console.log('id', selectedRows[0].id);
-      setId(selectedRows[0].id);
+      setId(() => selectedRows[0].id);
     },
   };
 

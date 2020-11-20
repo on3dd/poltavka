@@ -53,7 +53,7 @@ const Dispatchers: React.FC = () => {
     await dispatch(deleteDispatcher(id));
 
     closeModal();
-  }, []);
+  }, [id]);
 
   const handleCancel = useCallback(() => {
     closeModal();
@@ -66,7 +66,7 @@ const Dispatchers: React.FC = () => {
       selectedRows: DispatcherType[],
     ) => {
       console.log('id', selectedRows[0].id);
-      setId(selectedRows[0].id);
+      setId(() => selectedRows[0].id);
     },
   };
 
