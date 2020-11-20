@@ -11,17 +11,17 @@ import {
 import Dispatcher from '../types/Dispatcher';
 
 import { API_ENDPOINTS } from '../utils/constants';
-import { sleep } from '../utils/functions';
 
 const updateDispatcher = (item: Dispatcher) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: CREATING_DISPATCHER });
 
-    return sleep(2000)
-      .then(() => {
+    return axiosService
+      .post(API_ENDPOINTS.admin.users.dispatchers, item)
+      .then((res) => {
         dispatch({
           type: CREATING_DISPATCHER_SUCCESS,
-          payload: item,
+          payload: res.data.data,
         });
       })
       .catch((err) => {
@@ -30,21 +30,6 @@ const updateDispatcher = (item: Dispatcher) => {
           payload: err,
         });
       });
-
-    // return axiosService
-    //   .get(API_ENDPOINTS.queue)
-    //   .then((res) => {
-    //     dispatch({
-    //       type: CREATING_QUEUE_SUCCESS,
-    //       payload: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: CREATING_QUEUE_FAIL,
-    //       payload: err,
-    //     });
-    //   });
   };
 };
 

@@ -11,17 +11,18 @@ import {
 import Ordinary from '../types/Ordinary';
 
 import { API_ENDPOINTS } from '../utils/constants';
-import { sleep } from '../utils/functions';
 
 const createUser = (item: Ordinary) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: CREATING_USER });
 
-    return sleep(2000)
-      .then(() => {
+    return axiosService
+      .post(API_ENDPOINTS.admin.users.ordinary, item)
+      .then((res) => {
+
         dispatch({
           type: CREATING_USER_SUCCESS,
-          payload: item,
+          payload: res.data.data,
         });
       })
       .catch((err) => {
@@ -30,21 +31,6 @@ const createUser = (item: Ordinary) => {
           payload: err,
         });
       });
-
-    // return axiosService
-    //   .get(API_ENDPOINTS.queue)
-    //   .then((res) => {
-    //     dispatch({
-    //       type: CREATING_QUEUE_SUCCESS,
-    //       payload: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: CREATING_QUEUE_FAIL,
-    //       payload: err,
-    //     });
-    //   });
   };
 };
 
