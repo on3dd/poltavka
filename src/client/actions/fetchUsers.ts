@@ -15,7 +15,7 @@ const fetchUsers = () => {
     dispatch({ type: FETCHING_USERS });
 
     return axiosService
-      .get(API_ENDPOINTS.admin.users.ordinary)
+      .get(API_ENDPOINTS.admin.users.ord.index)
       .then((res) => {
         dispatch({
           type: FETCHING_USERS_SUCCESS,

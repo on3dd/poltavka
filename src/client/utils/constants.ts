@@ -20,9 +20,24 @@ export const API_ENDPOINTS = {
     index: '/admin',
     security: '/admin/security',
     users: {
-      ordinary: '/admin/users/ordinary',
-      dispatchers: '/admin/users/dispatchers',
-      administrators: '/admin/users/admins',
+      ord: {
+        index: '/admin/users/ordinary',
+        id: (id: number) => {
+          return `/admin/users/ordinary/${id}`;
+        },
+      },
+      dis: {
+        index: '/admin/users/dispatchers',
+        id: (id: number) => {
+          return `/admin/users/ordinary/${id}`;
+        },
+      },
+      adm: {
+        index: '/admin/users/admins',
+        id: (id: number) => {
+          return `/admin/users/ordinary/${id}`;
+        },
+      },
     },
   },
 };

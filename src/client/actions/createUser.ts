@@ -17,9 +17,8 @@ const createUser = (item: Ordinary) => {
     dispatch({ type: CREATING_USER });
 
     return axiosService
-      .post(API_ENDPOINTS.admin.users.ordinary, item)
+      .post(API_ENDPOINTS.admin.users.ord.index, item)
       .then((res) => {
-
         dispatch({
           type: CREATING_USER_SUCCESS,
           payload: res.data.data,

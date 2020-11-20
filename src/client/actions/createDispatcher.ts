@@ -17,7 +17,7 @@ const updateDispatcher = (item: Dispatcher) => {
     dispatch({ type: CREATING_DISPATCHER });
 
     return axiosService
-      .post(API_ENDPOINTS.admin.users.dispatchers, item)
+      .post(API_ENDPOINTS.admin.users.dis.index, item)
       .then((res) => {
         dispatch({
           type: CREATING_DISPATCHER_SUCCESS,

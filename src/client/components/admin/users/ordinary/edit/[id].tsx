@@ -63,12 +63,7 @@ const EditById = () => {
     console.log('Success:', values);
 
     await dispatch(submitFunction(values));
-
-    // if (initialValues.id) {
-    //   await router.push(
-    //     `/admin/users/ordinary/edit/${initialValues.id}`,
-    //   );
-    // }
+    await router.push('/admin/users/ordinary');
   };
 
   const onFinishFailed = (errorInfo: any) => {

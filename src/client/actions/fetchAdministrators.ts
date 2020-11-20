@@ -15,7 +15,7 @@ const fetchDispatchers = () => {
     dispatch({ type: FETCHING_ADMINISTRATORS });
 
     return axiosService
-      .get(API_ENDPOINTS.admin.users.administrators)
+      .get(API_ENDPOINTS.admin.users.adm.index)
       .then((res) => {
         dispatch({
           type: FETCHING_ADMINISTRATORS_SUCCESS,

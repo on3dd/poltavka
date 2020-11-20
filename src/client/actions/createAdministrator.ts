@@ -17,7 +17,7 @@ const updateAdministrator = (item: Administrator) => {
     dispatch({ type: CREATING_ADMINISTRATOR });
 
     return axiosService
-      .post(API_ENDPOINTS.admin.users.administrators, item)
+      .post(API_ENDPOINTS.admin.users.adm.index, item)
       .then((res) => {
         dispatch({
           type: CREATING_ADMINISTRATOR_SUCCESS,

@@ -9,18 +9,17 @@ import {
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
-import { sleep } from '../utils/functions';
-import { data } from '../components/admin/users/table/config';
 
 const fetchDispatcher = (id: number) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({ type: FETCHING_DISPATCHER });
 
-    return sleep(2000)
-      .then(() => {
+    return axiosService
+      .get(API_ENDPOINTS.admin.users.dis.id(id))
+      .then((res) => {
         dispatch({
           type: FETCHING_DISPATCHER_SUCCESS,
-          payload: data.find((el) => el.id === id),
+          payload: res.data.data,
         });
       })
       .catch((err) => {
@@ -29,21 +28,6 @@ const fetchDispatcher = (id: number) => {
           payload: err,
         });
       });
-
-    // return axiosService
-    //   .get(API_ENDPOINTS.queue)
-    //   .then((res) => {
-    //     dispatch({
-    //       type: FETCHING_QUEUE_SUCCESS,
-    //       payload: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: FETCHING_QUEUE_FAIL,
-    //       payload: err,
-    //     });
-    //   });
   };
 };
 
